@@ -1,2 +1,2 @@
-# presentations
-Code and artifacts for the presentations I've given
+# Presentations
+Code and artifacts for my presentations
