@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<webParts>
+  <webPart xmlns="http://schemas.microsoft.com/WebPart/v3">
+    <metaData>
+      <type name="JK.SP.WebParts.ProviderWebPart.ProviderWebPart, $SharePoint.Project.AssemblyFullName$" />
+      <importErrorMessage>$Resources:core,ImportErrorMessage;</importErrorMessage>
+    </metaData>
+    <data>
+      <properties>
+        <property name="Title" type="string">Provider Web Part</property>
+        <property name="Description" type="string">Provides data to another web part.</property>
+        <property name="AllowClose" type="bool">False</property>
+      </properties>
+    </data>
+  </webPart>
+</webParts>

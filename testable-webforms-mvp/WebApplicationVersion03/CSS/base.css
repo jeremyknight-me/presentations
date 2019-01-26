@@ -1,0 +1,80 @@
+﻿#wrap 
+{
+    min-height: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0;
+}
+
+#content
+{
+    padding: 1em 0;
+}
+
+.control-label.required:after 
+{
+    color: #ff0000;
+    content:  " *";
+}
+
+.width-100 { width: 100%; }
+
+.btn-group-text { cursor: text; }
+
+.control-label 
+{
+	padding-top: 17px !important;
+	text-align: left !important;
+}
+
+.container 
+{
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 96%;
+}
+
+[class*="col-"]
+{
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.row [class*="col-"] 
+{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.form-horizontal .form-control-static
+{
+	padding-top: 17px;
+}
+
+table.dark thead th 
+{
+    background: #666;
+    border: 1px solid #999;
+    color: #fff;
+}
+
+table.dark thead th a
+{
+    color: #fff;
+}
+
+table.dark thead th a:hover
+{
+    text-decoration: underline;
+}
+
+table.dark tfoot td 
+{
+    background: #ccc;
+}
+
+table.dark.table-striped > tbody > tr:nth-child(odd) > td,
+table.dark.table-striped > tbody > tr:nth-child(odd) > th
+{
+  background-color: #eee;
+}

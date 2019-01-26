@@ -1,0 +1,66 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="WebApplication.SiteMaster" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head runat="server">
+    <title></title>
+    <link href="~/Styles/Default.css" rel="stylesheet" type="text/css" />
+    <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form runat="server">
+        
+    <asp:ScriptManager ID="MasterPageScriptManager" runat="server">
+    </asp:ScriptManager>
+    
+    <asp:UpdateProgress ID="MasterPageUpdateProgress" runat="server" DynamicLayout="true">
+        <ProgressTemplate>
+            <div class="modal-background update-indicator">
+                <asp:Image ID="AjaxUpdatingIndicatorImage" runat="server" 
+                    EnableViewState="false" 
+                    ImageUrl="~/Images/ajax-indicator-verybig.gif" />
+            </div>
+        </ProgressTemplate>
+    </asp:UpdateProgress>
+
+    <div class="page">
+        <div class="header">
+            <div class="title">
+                <h1>
+                    Contact Tracking
+                </h1>
+            </div>
+            <div class="loginDisplay">
+            </div>
+            <div class="clear hideSkiplink">
+                <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal">
+                    <Items>
+                        <asp:MenuItem NavigateUrl="~/Default.aspx" Text="Home"/>
+                        <asp:MenuItem NavigateUrl="~/Pages/Companies.aspx" Text="Companies"/>
+                        <asp:MenuItem NavigateUrl="~/Pages/People.aspx" Text="People"/>
+                    </Items>
+                </asp:Menu>
+            </div>
+        </div>
+        <div class="main">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
+            
+            <asp:UpdatePanel ID="BottomUserMessageUpdatePanel" runat="server" ChildrenAsTriggers="False"
+                                UpdateMode="Conditional" RenderMode="Inline">
+                <ContentTemplate>  
+                    <asp:Label runat="server" ID="BottomUserMessageLabel" CssClass="hide" />
+                </ContentTemplate>
+            </asp:UpdatePanel>
+            
+        </div>
+        <div class="clear">
+        </div>
+    </div>
+    <div class="footer">
+        
+    </div>
+    </form>
+</body>
+</html>

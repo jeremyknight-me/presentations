@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7EBDFFEC-0CFF-4E3C-B9AB-8260DFC0A00C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>JK.SP.WebParts</RootNamespace>
+    <AssemblyName>JK.SP.WebParts</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{BB1F664B-9266-4fd6-B973-E1E44974B511};{14822709-B5A1-4724-98CA-57A101D1B079};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <SandboxedSolution>False</SandboxedSolution>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>Properties\key.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Microsoft.SharePoint" />
+    <Reference Include="Microsoft.SharePoint.Security" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ClassResourceWebPart\ClassResourceWebPart.cs" />
+    <Compile Include="ConsumerWebPart\ConsumerWebPart.cs" />
+    <Compile Include="HelloWorldWebPart\HelloWorldWebPart.cs" />
+    <Compile Include="HelloWorldWithEditorWebPart\HelloWorldEditorPart.cs" />
+    <Compile Include="HelloWorldWithEditorWebPart\HelloWorldWithEditorWebPart.cs" />
+    <Compile Include="IProject.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProviderWebPart\ProviderWebPart.cs" />
+    <Compile Include="VerbsWebPart\VerbsWebPart.cs" />
+    <Compile Include="VisualWebPart\VisualWebPart.cs" />
+    <Compile Include="VisualWebPart\VisualWebPartUserControl.ascx.cs">
+      <DependentUpon>VisualWebPartUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="VisualWebPart\VisualWebPartUserControl.ascx.designer.cs">
+      <DependentUpon>VisualWebPartUserControl.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WebPartUtil.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassResources\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{d4c53f6a-d52d-41cd-961f-32f0d1055dee}</SharePointProjectItemId>
+    </None>
+    <None Include="ClassResourceWebPart\ClassResourceWebPart.webpart" />
+    <None Include="ClassResourceWebPart\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{373a4340-2882-4554-bc81-ad2f48baa3ab}</SharePointProjectItemId>
+    </None>
+    <None Include="ConsumerWebPart\ConsumerWebPart.webpart" />
+    <None Include="ConsumerWebPart\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{50839122-1c23-4b5c-af2e-37398a68675d}</SharePointProjectItemId>
+    </None>
+    <None Include="Features\Feature1\Feature1.feature">
+      <FeatureId>{2d40298b-4e15-489c-b866-412e56729229}</FeatureId>
+    </None>
+    <None Include="HelloWorldWebPart\HelloWorldWebPart.webpart" />
+    <None Include="HelloWorldWebPart\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{7f516244-f42a-41e9-be51-172a97eb03b0}</SharePointProjectItemId>
+    </None>
+    <None Include="HelloWorldWithEditorWebPart\HelloWorldWithEditorWebPart.webpart" />
+    <None Include="HelloWorldWithEditorWebPart\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{4ac49f27-06bc-4b4d-8fce-60667e96c192}</SharePointProjectItemId>
+    </None>
+    <None Include="Properties\key.snk" />
+    <None Include="Package\Package.package">
+      <PackageId>{01a1706a-32e5-49aa-94cf-8e0e7de7ca57}</PackageId>
+    </None>
+    <None Include="Package\Package.Template.xml">
+      <DependentUpon>Package.package</DependentUpon>
+    </None>
+    <None Include="ProviderWebPart\ProviderWebPart.webpart" />
+    <None Include="ProviderWebPart\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{b3432cc3-f6ca-4bfe-85cc-2a4fc9ba2b20}</SharePointProjectItemId>
+    </None>
+    <None Include="VerbsWebPart\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{614e04e2-a54b-45bf-8897-be76dc2851b1}</SharePointProjectItemId>
+    </None>
+    <None Include="VerbsWebPart\VerbsWebPart.webpart" />
+    <None Include="VisualWebPart\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{48decfce-3f53-406b-b367-be72ee05748f}</SharePointProjectItemId>
+    </None>
+    <None Include="VisualWebPart\VisualWebPart.webpart" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="ClassResources\SharePoint2010Logo.jpg" />
+    <Content Include="ClassResourceWebPart\Elements.xml" />
+    <Content Include="ConsumerWebPart\Elements.xml" />
+    <Content Include="Features\Feature1\Feature1.Template.xml">
+      <DependentUpon>Feature1.feature</DependentUpon>
+    </Content>
+    <Content Include="HelloWorldWebPart\Elements.xml" />
+    <Content Include="HelloWorldWithEditorWebPart\Elements.xml" />
+    <Content Include="ProviderWebPart\Elements.xml" />
+    <Content Include="VerbsWebPart\Elements.xml" />
+    <Content Include="VisualWebPart\Elements.xml" />
+    <Content Include="VisualWebPart\VisualWebPartUserControl.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\SharePointTools\Microsoft.VisualStudio.SharePoint.targets" />
+</Project>
