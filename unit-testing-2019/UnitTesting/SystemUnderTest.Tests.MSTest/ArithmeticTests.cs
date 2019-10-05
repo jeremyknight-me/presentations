@@ -18,6 +18,9 @@ namespace SystemUnderTest.Tests.MSTest
 
             // assert
             Assert.AreEqual(expected, actual);
+
+            // CollectionAssert.
+            // StringAssert.
         }
 
         public static IEnumerable<object[]> AddData
