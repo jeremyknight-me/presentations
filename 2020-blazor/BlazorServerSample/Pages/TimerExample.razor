@@ -1,0 +1,75 @@
+﻿@page "/timer"
+@implements IDisposable
+@using System.Timers
+
+<h1>Timer Based Counter</h1>
+
+<p>Current count: @currentCount</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+@code {
+    private int currentCount = 0;
+
+    private void IncrementCount()
+    {
+        currentCount++;
+        Console.WriteLine($"Count incremented: {currentCount}");
+    }
+
+    private Timer timer;
+    private bool isTimerDisposed = false;
+
+    /// <summary>
+    /// During prerender, this component is rendered without calling OnAfterRender and then immediately disposed
+    /// this mean timer will be null so we have to check for null or use the Null-conditional operator?
+    /// </summary>
+    public void Dispose()
+    {
+        this.timer?.Stop();
+        this.timer?.Dispose();
+        this.timer = null;
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            timer = new Timer
+            {
+                AutoReset = true,
+                Interval = 1000
+            };
+            timer.Elapsed += OnTimerInterval;
+            timer.Disposed += OnTimerDisposed;
+            this.TryStartTimer();
+        }
+        base.OnAfterRender(firstRender);
+    }
+
+    private void OnTimerInterval(object sender, ElapsedEventArgs e)
+    {
+        this.TryStopTimer();
+        IncrementCount();
+        InvokeAsync(() => StateHasChanged());
+        this.TryStartTimer();
+    }
+
+    private void OnTimerDisposed(object sender, EventArgs e) => this.isTimerDisposed = true;
+
+    private void TryStartTimer()
+    {
+        if (this.timer != null && !this.isTimerDisposed)
+        {
+            this.timer.Start();
+        }
+    }
+
+    private void TryStopTimer()
+    {
+        if (this.timer != null && !this.isTimerDisposed)
+        {
+            this.timer.Stop();
+        }
+    }
+}
