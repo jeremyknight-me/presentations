@@ -4,10 +4,6 @@ public class PersonUpdateCommand
 {
     private readonly IGetPersonByIdQuery personRepo;
 
-    public PersonUpdateCommand() : this(new GetPersonByIdQuery())
-    {
-    }
-
     public PersonUpdateCommand(IGetPersonByIdQuery personRepository)
     {
         this.personRepo = personRepository;
