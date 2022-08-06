@@ -5,6 +5,20 @@ namespace SystemUnderTest.Tests;
 
 public class AgeCalculatorTests
 {
+    #region No Provider
+
+    [Fact]
+    public void CalculateAge_DoesNotAlwaysWork()
+    {
+        var sut = new AgeCalculator();
+        var actual = sut.Calculate(new DateTime(1983, 03, 15));
+        Assert.Equal(39, actual);
+    }
+
+    #endregion
+
+    #region Provider
+
     //[Theory]
     //[InlineData(29, "1983-03-15", "2012-06-12")]
     //[InlineData(8, "2000-02-29", "2009-02-28")] // leap year not reached
@@ -13,20 +27,20 @@ public class AgeCalculatorTests
     //{
     //    var birthdayDate = DateTime.Parse(birthday);
     //    var nowDate = DateTime.Parse(now);
-    //    var dateTimeProvider = new MockDateTimeProvider 
-    //    { 
+    //    var dateTimeProvider = new MockDateTimeProvider
+    //    {
     //        Today = nowDate
     //    };
     //    var actual = new AgeCalculator(dateTimeProvider).Calculate(birthdayDate);
     //    Assert.Equal(expected, actual);
     //}
 
-    private record MockDateTimeProvider : JK.Common.DateTimeProviders.IDateTimeProvider
-    {
-        public DateTime Now { get; init; }
+    //private record MockDateTimeProvider : JK.Common.DateTimeProviders.IDateTimeProvider
+    //{
+    //    public DateTime Now { get; init; }
+    //    public DateTime Today { get; init; }
+    //    public DateTime UtcNow { get; init; }
+    //}
 
-        public DateTime Today { get; init; }
-
-        public DateTime UtcNow { get; init; }
-    }
+    #endregion
 }

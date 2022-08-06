@@ -1,4 +1,6 @@
-﻿namespace SystemUnderTest;
+﻿using System;
+
+namespace SystemUnderTest;
 
 public static class Arithmetic
 {
