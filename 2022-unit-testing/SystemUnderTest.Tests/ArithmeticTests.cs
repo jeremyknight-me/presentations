@@ -8,6 +8,7 @@ public class ArithmeticTests
 {
     #region Facts
 
+    [Fact]
     public void Add_OneTwo_Three()
     {
         // arrange
@@ -21,6 +22,7 @@ public class ArithmeticTests
         Assert.Equal(3, actual);
     }
 
+    [Fact]
     public void Add_TwoTwo_Four()
     {
         // arrange
