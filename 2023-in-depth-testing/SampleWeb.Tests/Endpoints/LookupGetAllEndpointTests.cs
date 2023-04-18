@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
 using DataPersistence;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using SampleWeb.Endpoints;
 using SampleWeb.Repositories;
@@ -9,26 +10,12 @@ namespace SampleWeb.Tests.Endpoints;
 
 public class LookupGetAllEndpointTests
 {
-    private readonly Mock<ILookupRepository> mockRepo;
-    private readonly Expression<Func<ILookupRepository, IReadOnlyList<DataPersistence.Lookup>>> repoMethod;
-
-    public LookupGetAllEndpointTests()
-    {
-        this.mockRepo = new Mock<ILookupRepository>();
-        this.repoMethod = x => x.GetAllAsync().Result;
-    }
-
     [Fact]
     public async Task Execute_NoResults()
     {
-        this.mockRepo.Setup(this.repoMethod)
-            .Returns(Enumerable.Empty<DataPersistence.Lookup>().ToList());
-        var sut = new LookupGetAllEndpoint(this.mockRepo.Object);
-
-        var result = await sut.Execute();
-        this.mockRepo.Verify(this.repoMethod, Times.Once);
-        Assert.IsType<Ok<IEnumerable<LookupGetResponse>>>(result);
-        var ok = result as Ok<IEnumerable<LookupGetResponse>>;
+        var result = await this.RunTest(Enumerable.Empty<Lookup>().ToList());
+        Assert.IsType<Ok<IEnumerable<LookupResponse>>>(result);
+        var ok = result as Ok<IEnumerable<LookupResponse>>;
         Assert.NotNull(ok);
         Assert.NotNull(ok.Value);
         Assert.Empty(ok.Value);
@@ -38,16 +25,24 @@ public class LookupGetAllEndpointTests
     public async Task Execute_Results()
     {
         var data = LookupFakerFactory.Make(1337, 10);
-        this.mockRepo.Setup(this.repoMethod).Returns(data);
-        var sut = new LookupGetAllEndpoint(this.mockRepo.Object);
-
-        var result = await sut.Execute();
-        this.mockRepo.Verify(this.repoMethod, Times.Once);
-        Assert.IsType<Ok<IEnumerable<LookupGetResponse>>>(result);
-        var ok = result as Ok<IEnumerable<LookupGetResponse>>;
+        var result = await this.RunTest(data);
+        Assert.IsType<Ok<IEnumerable<LookupResponse>>>(result);
+        var ok = result as Ok<IEnumerable<LookupResponse>>;
         Assert.NotNull(ok);
         Assert.NotNull(ok.Value);
         Assert.NotEmpty(ok.Value);
         Assert.Equal(10, ok.Value.Count());
+    }
+
+    private async Task<IResult> RunTest(IReadOnlyList<Lookup> data)
+    {
+        var mockRepo = new Mock<ILookupRepository>();
+        Expression<Func<ILookupRepository, IReadOnlyList<Lookup>>> repoMethod = x => x.GetAllAsync().Result;
+        var sut = new LookupGetAllEndpoint(mockRepo.Object);
+        mockRepo.Setup(repoMethod).Returns(data);
+
+        var result = await sut.Execute();
+        mockRepo.Verify(repoMethod, Times.Once);
+        return result;
     }
 }

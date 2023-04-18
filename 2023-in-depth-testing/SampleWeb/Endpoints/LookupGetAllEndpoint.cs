@@ -16,12 +16,7 @@ internal sealed class LookupGetAllEndpoint
     {
 		var lookups = await this.repository.GetAllAsync();
 		var response = lookups
-			.Select(x => new LookupGetResponse
-			{
-				Id = x.Id,
-				Name = x.Name,
-				IsDeleted = x.IsDeleted
-			});
+			.Select(x => LookupResponse.Create(x));
 		return Results.Ok(response);
     }
 }

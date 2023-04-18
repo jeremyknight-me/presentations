@@ -20,12 +20,7 @@ internal sealed class LookupGetByIdEndpoint
             return Results.NotFound();
         }
 
-        var response = new LookupGetResponse
-		{
-			Id = lookup.Id,
-			Name = lookup.Name,
-			IsDeleted = lookup.IsDeleted
-		};
+        var response = LookupResponse.Create(lookup);
 		return Results.Ok(response);
 	}
 }

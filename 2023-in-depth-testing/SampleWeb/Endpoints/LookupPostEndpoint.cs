@@ -2,6 +2,7 @@
 using FluentValidation;
 using SampleWeb.Repositories;
 using SampleWeb.Requests;
+using SampleWeb.Responses;
 
 namespace SampleWeb.Endpoints;
 
@@ -26,6 +27,7 @@ internal sealed class LookupPostEndpoint
 
         var lookup = Lookup.Create(request.Name);
         await this.repository.AddAsync(lookup);
-        return Results.Created($"/lookups/{lookup.Id}", lookup);
+        var response = LookupResponse.Create(lookup);
+        return Results.Created($"/lookups/{lookup.Id}", response);
     }
 }
