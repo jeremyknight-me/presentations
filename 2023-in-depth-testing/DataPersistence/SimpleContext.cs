@@ -1,5 +1,4 @@
-﻿using Bogus;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace DataPersistence;
 
@@ -22,18 +21,6 @@ public class SimpleContext : DbContext
 
 		l.Property(x => x.IsDeleted).HasDefaultValue(false);
 
-		l.HasData(this.GenerateData());
-	}
-
-	private IEnumerable<Lookup> GenerateData()
-	{
-		Randomizer.Seed = new Random(1127190);
-		var id = 0;
-		var fakeLookups = new Faker<Lookup>()
-			.RuleFor(x => x.Id, f => ++id)
-			.RuleFor(x => x.Name, f => $"{f.Hacker.Adjective()} {f.Hacker.Noun()}")
-			.RuleFor(x => x.IsDeleted, f => f.Random.Bool());
-		var lookups = fakeLookups.Generate(100);
-		return lookups;
+		l.HasData(LookupFakerFactory.Make(1127190, 100));
 	}
 }

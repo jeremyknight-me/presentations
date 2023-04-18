@@ -21,7 +21,7 @@ internal sealed class LookupGetAllEndpoint
 				Id = x.Id,
 				Name = x.Name,
 				IsDeleted = x.IsDeleted
-			}).ToArray();
+			});
 		return Results.Ok(response);
     }
 }
