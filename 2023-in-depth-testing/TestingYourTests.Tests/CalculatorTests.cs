@@ -40,5 +40,9 @@ public class CalculatorTests
 		var (result, remainder) = this.sut.Divide(a, b);
 		Assert.Equal(expected, result);
 		Assert.Equal(expectedRemainder, remainder);
-	}
+    }
+
+    [Fact]
+    public void Divide_DivideByZero_Exception()
+        => Assert.Throws<DivideByZeroException>(() => this.sut.Divide(1, 0));
 }
