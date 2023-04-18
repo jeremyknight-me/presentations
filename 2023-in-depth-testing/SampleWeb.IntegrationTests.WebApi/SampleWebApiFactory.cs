@@ -3,8 +3,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace SampleWeb.IntegrationTests.WebApi;
 
-public class SampleWebApiFactory<TProgram>
-    : WebApplicationFactory<TProgram> where TProgram : class
+public class SampleWebApiFactory : WebApplicationFactory<Program>
 {
     protected override IHost CreateHost(IHostBuilder builder)
     {

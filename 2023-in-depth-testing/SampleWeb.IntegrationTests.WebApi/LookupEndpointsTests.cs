@@ -3,12 +3,12 @@ using SampleWeb.Responses;
 
 namespace SampleWeb.IntegrationTests.WebApi;
 
-public class LookupEndpointsTests : IClassFixture<SampleWebApiFactory<Program>>
+public class LookupEndpointsTests : IClassFixture<SampleWebApiFactory>
 {
-    private readonly SampleWebApiFactory<Program> factory;
+    private readonly SampleWebApiFactory factory;
     private readonly HttpClient httpClient;
 
-    public LookupEndpointsTests(SampleWebApiFactory<Program> webApplicationFactory)
+    public LookupEndpointsTests(SampleWebApiFactory webApplicationFactory)
     {
         this.factory = webApplicationFactory;
         this.httpClient = this.factory.CreateClient();
