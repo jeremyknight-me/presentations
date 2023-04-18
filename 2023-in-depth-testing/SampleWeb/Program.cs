@@ -1,4 +1,4 @@
-using SampleWeb.Extensions;
+﻿using SampleWeb.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
@@ -18,3 +18,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseMinimalEndpoints();
 app.Run();
+
+public partial class Program
+{
+    // force Program to be public
+}
