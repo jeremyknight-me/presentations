@@ -1,4 +1,5 @@
 ﻿using DataPersistence;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using SampleWeb.Endpoints;
 using SampleWeb.Repositories;
@@ -15,7 +16,9 @@ internal static class DependencyInjectionExtensions
 			options.UseSqlServer(connectionString);
 		});
 
-		services.AddScoped<ILookupRepository, LookupRepository>();
+        services.AddValidatorsFromAssemblyContaining<Program>();
+
+        services.AddScoped<ILookupRepository, LookupRepository>();
 
 		services.AddScoped<LookupGetAllEndpoint>();
         services.AddScoped<LookupGetByIdEndpoint>();

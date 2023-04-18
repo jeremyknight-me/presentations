@@ -8,7 +8,7 @@ public interface ILookupRepository
     Task AddAsync(Lookup lookup);
     Task DeleteAsync(int id);
     Task<IReadOnlyList<Lookup>> GetAllAsync();
-    Task<Lookup> GetByIdAsync(int id);
+    Task<Lookup?> GetByIdAsync(int id);
 }
 
 internal sealed class LookupRepository : ILookupRepository
@@ -36,6 +36,6 @@ internal sealed class LookupRepository : ILookupRepository
     public async Task<IReadOnlyList<Lookup>> GetAllAsync() 
 		=> await this.context.Lookups.ToListAsync();
 
-	public async Task<Lookup> GetByIdAsync(int id)
+	public async Task<Lookup?> GetByIdAsync(int id)
 		=> await this.context.Lookups.FindAsync(id);
 }

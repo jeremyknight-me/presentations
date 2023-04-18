@@ -15,7 +15,12 @@ internal sealed class LookupGetByIdEndpoint
     public async Task<IResult> Execute(int id)
 	{
 		var lookup = await this.repository.GetByIdAsync(id);
-		var response = new LookupGetResponse
+        if (lookup is null)
+        {
+            return Results.NotFound();
+        }
+
+        var response = new LookupGetResponse
 		{
 			Id = lookup.Id,
 			Name = lookup.Name,
