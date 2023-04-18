@@ -1,11 +1,11 @@
 ﻿using System.Linq.Expressions;
 using DataPersistence;
+using Microsoft.AspNetCore.Http.HttpResults;
 using SampleWeb.Endpoints;
 using SampleWeb.Repositories;
-using SampleWeb.Validators;
 using SampleWeb.Requests;
-using Microsoft.AspNetCore.Http.HttpResults;
 using SampleWeb.Responses;
+using SampleWeb.Validators;
 
 namespace SampleWeb.Tests.Endpoints;
 
@@ -27,7 +27,7 @@ public class LookupPostEndpointTests
     public async Task Execute_Invalid()
     {
         this.mockRepo.Setup(this.repoMethod);
-        var request = new LookupPostRequest {  Name = string.Empty };
+        var request = new LookupPostRequest { Name = string.Empty };
 
         var result = await this.sut.Execute(request);
         this.mockRepo.Verify(this.repoMethod, Times.Never);
