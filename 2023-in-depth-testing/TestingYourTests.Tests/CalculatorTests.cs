@@ -13,7 +13,7 @@ public class CalculatorTests
 	[InlineData(5, 5, 10)]
 	public void Add_Theories(int a, int b, int expected)
 	{
-		var actual = sut.Add(a, b);
+		var actual = this.sut.Add(a, b);
 		Assert.Equal(expected, actual);
 	}
 
@@ -21,7 +21,7 @@ public class CalculatorTests
 	[InlineData(5, 5, 0)]
 	public void Subtract_Theories(int a, int b, int expected)
 	{
-		var actual = sut.Subtract(a, b);
+		var actual = this.sut.Subtract(a, b);
 		Assert.Equal(expected, actual);
 	}
 
