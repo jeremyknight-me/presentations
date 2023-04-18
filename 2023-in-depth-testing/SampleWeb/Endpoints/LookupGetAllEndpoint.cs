@@ -14,10 +14,17 @@ internal sealed class LookupGetAllEndpoint
 
     public async Task<IResult> Execute()
     {
-		var lookups = await this.repository.GetAllAsync();
-		var response = lookups
-			.Select(x => LookupResponse.Create(x));
-		return Results.Ok(response);
+        try
+        {
+            var lookups = await this.repository.GetAllAsync();
+            var response = lookups
+                .Select(x => LookupResponse.Create(x));
+            return Results.Ok(response);
+        } 
+		catch (Exception ex)
+        {
+            throw;
+        }
     }
 }
 
