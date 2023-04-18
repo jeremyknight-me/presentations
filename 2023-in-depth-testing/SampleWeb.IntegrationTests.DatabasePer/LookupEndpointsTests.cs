@@ -16,7 +16,7 @@ public class LookupEndpointsTests : IClassFixture<SampleWebApiFactory>
     public LookupEndpointsTests(SampleWebApiFactory webApplicationFactory)
     {
         this.factory = webApplicationFactory;
-        this.httpClient = this.factory.CreateClient();
+        this.httpClient = webApplicationFactory.CreateClient();
     }
 
     [Fact]

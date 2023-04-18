@@ -8,7 +8,8 @@ using SampleWeb.Responses;
 
 namespace SampleWeb.IntegrationTests.CleanupBetween;
 
-public class LookupEndpointsTests : IClassFixture<SampleWebApiFactory>
+[Collection(SharedCollection.CollectionName)]
+public class LookupEndpointsTests : IAsyncLifetime
 {
     private readonly SampleWebApiFactory factory;
     private readonly HttpClient httpClient;
@@ -16,7 +17,7 @@ public class LookupEndpointsTests : IClassFixture<SampleWebApiFactory>
     public LookupEndpointsTests(SampleWebApiFactory webApplicationFactory)
     {
         this.factory = webApplicationFactory;
-        this.httpClient = this.factory.CreateClient();
+        this.httpClient = webApplicationFactory.CreateClient();
     }
 
     [Fact]
@@ -83,4 +84,7 @@ public class LookupEndpointsTests : IClassFixture<SampleWebApiFactory>
             Assert.Null(entity);
         }
     }
+
+    public Task InitializeAsync() => Task.CompletedTask;
+    public async Task DisposeAsync() => await this.factory.ResetDatabaseAsync();
 }

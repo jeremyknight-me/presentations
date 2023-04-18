@@ -11,7 +11,7 @@ namespace SampleWeb.IntegrationTests.DatabasePer;
 
 public class SampleWebApiFactory : WebApplicationFactory<Program>, IAsyncLifetime
 {
-    private readonly MsSqlContainer dbContainer = new MsSqlBuilder().Build();
+    private readonly MsSqlContainer testContainer = new MsSqlBuilder().Build();
 
     protected override void ConfigureWebHost(IWebHostBuilder builder)
         => builder.ConfigureTestServices(services =>
@@ -22,7 +22,7 @@ public class SampleWebApiFactory : WebApplicationFactory<Program>, IAsyncLifetim
             services.AddDbContext<SimpleContext>(options =>
             {
                 options
-                    .UseSqlServer(this.dbContainer.GetConnectionString());
+                    .UseSqlServer(this.testContainer.GetConnectionString());
             });
 
             var provider = services.BuildServiceProvider();
@@ -33,12 +33,8 @@ public class SampleWebApiFactory : WebApplicationFactory<Program>, IAsyncLifetim
         });
 
     public async Task InitializeAsync()
-    {
-        await this.dbContainer.StartAsync();
-    }
+        => await this.testContainer.StartAsync();
 
     public new async Task DisposeAsync()
-    {
-        await this.dbContainer.DisposeAsync();
-    }
+        => await this.testContainer.DisposeAsync();
 }
