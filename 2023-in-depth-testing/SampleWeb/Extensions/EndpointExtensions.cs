@@ -28,7 +28,7 @@ internal static class EndpointExtensions
         lookups
             .MapPost("/", async ([FromServices] LookupPostEndpoint endpoint, LookupPostRequest request)
                 => await endpoint.Execute(request))
-            .Produces<IEnumerable<LookupResponse>>(StatusCodes.Status200OK)
+            .Produces<LookupResponse>(StatusCodes.Status201Created)
             .Produces(StatusCodes.Status400BadRequest);
 
         lookups
