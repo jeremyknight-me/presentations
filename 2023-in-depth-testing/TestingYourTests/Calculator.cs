@@ -2,24 +2,21 @@
 
 public sealed class Calculator
 {
-	public int Add(int first, int second)
-		=> first + second;
+	public int Add(int a, int b) => a + b;
 
-	public int Subtract(int first, int second)
-		=> first - second;
+	public int Subtract(int a, int b) => a - b;
 
-	public int Multiply(int first, int second)
-		=> first * second;
+	public int Multiply(int a, int b) => a * b;
 
-	public (int Result, int Remainder) Divide(int first, int second)
+	public (int Result, int Remainder) Divide(int a, int b)
 	{
-		if (second == 0)
+		if (b == 0)
 		{
 			throw new DivideByZeroException();
 		}
 
-		var result = first / second;
-		var remainder = first % second;
+		var result = a / b;
+		var remainder = a % b;
 		return (result, remainder);
 	}
 }

@@ -11,34 +11,34 @@ public class CalculatorTests
 
     [Theory]
 	[InlineData(5, 5, 10)]
-	public void Add_Theories(int first, int second, int expected)
+	public void Add_Theories(int a, int b, int expected)
 	{
-		var actual = sut.Add(first, second);
+		var actual = sut.Add(a, b);
 		Assert.Equal(expected, actual);
 	}
 
 	[Theory]
 	[InlineData(5, 5, 0)]
-	public void Subtract_Theories(int first, int second, int expected)
+	public void Subtract_Theories(int a, int b, int expected)
 	{
-		var actual = sut.Subtract(first, second);
+		var actual = sut.Subtract(a, b);
 		Assert.Equal(expected, actual);
 	}
 
 	[Theory]
 	[InlineData(1, 1, 1)]
-	public void Multiply_Theories(int first, int second, int expected)
+	public void Multiply_Theories(int a, int b, int expected)
 	{
-		var actual = this.sut.Multiply(first, second);
+		var actual = this.sut.Multiply(a, b);
 		Assert.Equal(expected, actual);
 	}
 
 	[Theory]
 	[InlineData(1, 1, 1, 0)]
-	public void Divide_Theories(int first, int second, int expected, int expectedRemainder)
+	public void Divide_Theories(int a, int b, int expected, int expectedRemainder)
 	{
-		var actual = this.sut.Divide(first, second);
-		Assert.Equal(expected, actual.Result);
-		Assert.Equal(expectedRemainder, actual.Remainder);
+		var (result, remainder) = this.sut.Divide(a, b);
+		Assert.Equal(expected, result);
+		Assert.Equal(expectedRemainder, remainder);
 	}
 }
