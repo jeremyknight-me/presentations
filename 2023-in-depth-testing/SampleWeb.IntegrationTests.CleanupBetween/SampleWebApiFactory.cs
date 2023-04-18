@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Testcontainers.MsSql;
 
-namespace SampleWeb.IntegrationTests.DatabasePer;
+namespace SampleWeb.IntegrationTests.CleanupBetween;
 
 public class SampleWebApiFactory : WebApplicationFactory<Program>, IAsyncLifetime
 {
