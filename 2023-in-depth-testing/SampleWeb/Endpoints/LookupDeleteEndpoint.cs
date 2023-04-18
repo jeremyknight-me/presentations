@@ -2,7 +2,7 @@
 
 namespace SampleWeb.Endpoints;
 
-public sealed class LookupDeleteEndpoint
+internal sealed class LookupDeleteEndpoint
 {
     private readonly ILookupRepository repository;
 
