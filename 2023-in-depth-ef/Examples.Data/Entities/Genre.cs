@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿namespace Examples.Data.Entities;
 
-namespace Examples.Data.Entities;
-
-public partial class Genre
+public class Genre
 {
     public int GenreId { get; set; }
-
     public string? Name { get; set; }
-
-    public virtual ICollection<Track> Tracks { get; set; } = new List<Track>();
+    public ICollection<Track> Tracks { get; set; } = new List<Track>();
 }

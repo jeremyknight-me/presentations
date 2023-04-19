@@ -1,4 +1,7 @@
-﻿using Examples.Data;
+﻿using System.Text.Json.Serialization;
+using Examples.Data;
+using Examples.Web;
+using Microsoft.AspNetCore.Http.Json;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +10,11 @@ var services = builder.Services;
 
 services.AddEndpointsApiExplorer();
 services.AddSwaggerGen();
+
+services.Configure<JsonOptions>(options =>
+{
+    options.SerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+});
 
 services.AddDbContext<ChinookContext>(options =>
 {
@@ -27,5 +35,7 @@ app.UseHttpsRedirection();
 
 app.MapGet("/status", () => Results.Ok("active"))
     .ExcludeFromDescription();
+
+app.UseApplicationEndpoints();
 
 app.Run();

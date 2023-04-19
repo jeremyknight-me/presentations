@@ -1,4 +1,5 @@
 ﻿using Examples.Data.Entities;
+using Examples.Data.KeylessEntities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Examples.Data;
@@ -8,6 +9,7 @@ namespace Examples.Data;
 ///     dotnet ef dbcontext scaffold "YOUR_CONNECTION_STRING_HERE" Microsoft.EntityFrameworkCore.SqlServer -o Entities
 ///
 /// After generation:
+/// - moved context out of Entities folder
 /// - removed 'virtual' keyword from DbSet properties
 /// - converted DbSet properties from { get; set; } to Set of T
 /// </summary>
@@ -32,6 +34,10 @@ public class ChinookContext : DbContext
     public DbSet<MediaType> MediaTypes => this.Set<MediaType>();
     public DbSet<Playlist> Playlists => this.Set<Playlist>();
     public DbSet<Track> Tracks => this.Set<Track>();
+
+    // Keyless Entities
+
+    public DbSet<AlbumArtist> AlbumArtists => this.Set<AlbumArtist>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -210,6 +216,16 @@ public class ChinookContext : DbContext
                 .HasForeignKey(d => d.MediaTypeId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_TrackMediaTypeId");
+        });
+
+        this.ConfigureKeylessEntities(modelBuilder);
+    }
+
+    private void ConfigureKeylessEntities(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<AlbumArtist>(entity =>
+        {
+            entity.HasNoKey();
         });
     }
 }
