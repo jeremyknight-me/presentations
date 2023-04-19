@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainDriven.Domain", "Doma
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomainDriven.Persistence", "DomainDriven.Persistence\DomainDriven.Persistence.csproj", "{2504D390-DBFC-4CFB-8811-EB7F6561A102}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Examples.Benchmarks", "Examples.Benchmarks\Examples.Benchmarks.csproj", "{B9D65430-F609-4FC4-8EDC-39FE9473B259}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +45,10 @@ Global
 		{2504D390-DBFC-4CFB-8811-EB7F6561A102}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2504D390-DBFC-4CFB-8811-EB7F6561A102}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2504D390-DBFC-4CFB-8811-EB7F6561A102}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9D65430-F609-4FC4-8EDC-39FE9473B259}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9D65430-F609-4FC4-8EDC-39FE9473B259}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9D65430-F609-4FC4-8EDC-39FE9473B259}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9D65430-F609-4FC4-8EDC-39FE9473B259}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -52,6 +58,7 @@ Global
 		{0F3657E9-4992-4CE5-A3C5-1FD9007AB93A} = {2588F78F-4D75-4D5A-B284-BF22B6814086}
 		{B591799B-8028-447B-8285-C88A7A0683EC} = {1C7B22D1-0649-4146-BB20-9E76AADB7DE1}
 		{2504D390-DBFC-4CFB-8811-EB7F6561A102} = {1C7B22D1-0649-4146-BB20-9E76AADB7DE1}
+		{B9D65430-F609-4FC4-8EDC-39FE9473B259} = {2588F78F-4D75-4D5A-B284-BF22B6814086}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {69B13C8D-499A-49DC-A345-38A1CB4A05ED}
