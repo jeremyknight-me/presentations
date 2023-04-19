@@ -37,7 +37,7 @@ public class ChinookContext : DbContext
 
     // Keyless Entities
 
-    public DbSet<AlbumArtist> AlbumArtists => this.Set<AlbumArtist>();
+    public DbSet<ArtistTracks> AlbumArtists => this.Set<ArtistTracks>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -223,7 +223,7 @@ public class ChinookContext : DbContext
 
     private void ConfigureKeylessEntities(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<AlbumArtist>(entity =>
+        modelBuilder.Entity<ArtistTracks>(entity =>
         {
             entity.HasNoKey();
         });
