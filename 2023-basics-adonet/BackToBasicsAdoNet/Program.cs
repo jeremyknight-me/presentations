@@ -8,13 +8,13 @@ internal class Program
     {
         try
         {
-            new Examples.QueryExample().Run();
-            //new Examples.QueryByIdExample().Run();
-            //new Examples.InsertExample().Run();
-            //new Examples.UpdateExample().Run();
-            //new Examples.DeleteExample().Run();
-            //new Examples.BulkInsertExample().Run();
-            //new Examples.IntegrationExample().Run();
+            Examples.QueryExample.Run();
+            Examples.QueryByIdExample.Run();
+            Examples.InsertExample.Run();
+            Examples.UpdateExample.Run();
+            Examples.DeleteExample.Run();
+            Examples.BulkInsertExample.Run();
+            Examples.IntegrationExample.Run();
         }
         catch (Exception ex)
         {

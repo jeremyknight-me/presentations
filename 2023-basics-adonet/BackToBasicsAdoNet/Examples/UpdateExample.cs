@@ -1,17 +1,15 @@
 ﻿using Microsoft.Data.SqlClient;
 using System;
 using System.Data;
-using System.Transactions;
 
 namespace BackToBasicsAdoNet.Examples;
 
-public class UpdateExample
+public static class UpdateExample
 {
-    public void Run()
+    public static void Run()
     {
-        using (var scope = new TransactionScope())
-        using (var connection = new SqlConnection(Settings.ConnectionString))
-        using (SqlCommand command = connection.CreateCommand())
+        using var connection = new SqlConnection(Settings.ConnectionString);
+        using SqlCommand command = connection.CreateCommand();
         {
             command.CommandType = CommandType.Text; // or StoredProcedure
             command.CommandText = "UPDATE dbo.[Lookup] SET IsDeleted = 1 WHERE Id = @id;";
@@ -29,7 +27,6 @@ public class UpdateExample
             }
 
             var numRowAffected = command.ExecuteNonQuery();
-            scope.Complete();
             Console.WriteLine($"{numRowAffected} rows updated");
         }
     }
