@@ -32,7 +32,7 @@ internal class Program
             if (!enabled) { Examples.IntegrationExample.Run(connectionStrings); }
 
             if (!enabled) { Examples.BulkInsertExample.Run(connectionStrings); }
-            // todo: multiple result set query
+            if (!enabled) { Examples.QueryMultipleExample.Run(connectionStrings); }
         }
         catch (Exception ex)
         {

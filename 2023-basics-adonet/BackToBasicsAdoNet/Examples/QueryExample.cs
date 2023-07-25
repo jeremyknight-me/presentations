@@ -32,6 +32,5 @@ internal static class QueryExample
 				}
 			}
 		}
-		
 	}
 }
