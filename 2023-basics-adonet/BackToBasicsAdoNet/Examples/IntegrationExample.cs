@@ -1,4 +1,4 @@
-﻿using BackToBasicsAdoNet.EntityFramework;
+﻿using BackToBasicsAdoNet.EntityFramework.Simple;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Data;

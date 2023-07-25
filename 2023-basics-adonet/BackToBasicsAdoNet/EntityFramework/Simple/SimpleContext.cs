@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace BackToBasicsAdoNet.EntityFramework;
+namespace BackToBasicsAdoNet.EntityFramework.Simple;
 
 public class SimpleContext : DbContext
 {

@@ -19,7 +19,7 @@ internal class Program
 			};
 
             var enabled = true;
-            if (enabled) { Examples.QueryExample.Run(connectionStrings); }
+            if (!enabled) { Examples.QueryExample.Run(connectionStrings); }
             if (!enabled) { Examples.QueryByIdExample.Run(connectionStrings); }
             if (!enabled) { Examples.InsertExample.Run(connectionStrings); }
             if (!enabled) { Examples.UpdateExample.Run(connectionStrings); }

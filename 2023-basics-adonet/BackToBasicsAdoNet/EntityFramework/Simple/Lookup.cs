@@ -1,4 +1,4 @@
-﻿namespace BackToBasicsAdoNet.EntityFramework;
+﻿namespace BackToBasicsAdoNet.EntityFramework.Simple;
 
 public class Lookup
 {
