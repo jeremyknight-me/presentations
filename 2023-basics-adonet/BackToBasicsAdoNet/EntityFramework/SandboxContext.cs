@@ -14,7 +14,7 @@ public class SandboxContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         var lookup = modelBuilder.Entity<Lookup>();
-        lookup.ToTable("Lookup", "dbo");
+        lookup.ToTable("Lookups", "dbo");
         lookup.HasKey(x => x.Id);
         lookup.Property(x => x.Name).HasColumnType("nvarchar(100)").IsRequired();
         base.OnModelCreating(modelBuilder);

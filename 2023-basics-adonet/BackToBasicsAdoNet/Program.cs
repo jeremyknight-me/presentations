@@ -19,12 +19,12 @@ internal class Program
 			};
 
 			Examples.QueryExample.Run(connectionStrings);
-            //Examples.QueryByIdExample.Run(connectionStrings);
+            Examples.QueryByIdExample.Run(connectionStrings);
             //Examples.InsertExample.Run(connectionStrings);
             //Examples.UpdateExample.Run(connectionStrings);
             //Examples.DeleteExample.Run(connectionStrings);
             //Examples.BulkInsertExample.Run(connectionStrings);
-            //Examples.IntegrationExample.Run(connectionStrings);
+            Examples.IntegrationExample.Run(connectionStrings);
         }
         catch (Exception ex)
         {

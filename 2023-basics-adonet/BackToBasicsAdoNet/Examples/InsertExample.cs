@@ -11,7 +11,7 @@ internal static class InsertExample
 		using var connection = new SqlConnection(connectionStrings.Simple);
 		using SqlCommand command = connection.CreateCommand();
 		command.CommandType = CommandType.Text; // or StoredProcedure
-		command.CommandText = "INSERT INTO dbo.[Lookup](Name) VALUES (@name); SELECT SCOPE_IDENTITY();";
+		command.CommandText = "INSERT INTO dbo.[Lookups](Name) VALUES (@name); SELECT SCOPE_IDENTITY();";
 
 		var newName = "The New Guy";
 		var nameParameter = command.CreateParameter();

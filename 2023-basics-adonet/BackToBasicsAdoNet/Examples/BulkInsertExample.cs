@@ -13,7 +13,7 @@ internal static class BulkInsertExample
 			SqlBulkCopyOptions.KeepNulls | SqlBulkCopyOptions.UseInternalTransaction,
 			null);
 		bulk.BatchSize = 10;
-		bulk.DestinationTableName = "Lookup";
+		bulk.DestinationTableName = "Lookups";
 		bulk.ColumnMappings.Add("Name", "Name"); // source, destination
 
 		var table = new DataTable();

@@ -14,7 +14,7 @@ internal static class IntegrationExample
 		using var command = connection.CreateCommand();
 		
 		command.CommandType = CommandType.Text; // or StoredProcedure
-		command.CommandText = "SELECT Id, Name FROM [dbo].[Lookup] WHERE IsDeleted = 0";
+		command.CommandText = "SELECT Id, Name FROM [dbo].[Lookups] WHERE IsDeleted = 0";
 
 		if (connection.State != ConnectionState.Open)
 		{
@@ -27,7 +27,8 @@ internal static class IntegrationExample
 		{
 			var id = dataReader["Id"];
 			var name = dataReader["Name"];
-			// Console.WriteLine handles a lot of additional parsing, checks, etc. that would normally be done.
+			// NOTE: ToString() handles a lot of additional parsing, checks, etc.
+			// that would normally be done by the developer.
 			Console.WriteLine($"Id = {id} | Name = {name}");
 		}
 	}

@@ -13,7 +13,7 @@ internal static class DeleteExample
 		using var connection = new SqlConnection(connectionStrings.Simple);
 		using SqlCommand command = connection.CreateCommand();
 		command.CommandType = CommandType.Text; // or StoredProcedure
-		command.CommandText = "DELETE FROM dbo.[Lookup] WHERE Id = @id;";
+		command.CommandText = "DELETE FROM dbo.[Lookups] WHERE Id = @id;";
 
 		var idParameter = command.CreateParameter();
 		idParameter.DbType = DbType.Int32;

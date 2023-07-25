@@ -9,7 +9,7 @@ internal static class QueryExample
 	internal static void Run(ConnectionStrings connectionStrings)
     {
 		using (var connection = new SqlConnection(connectionStrings.Simple)) 
-		using (SqlCommand command = connection.CreateCommand())
+		using (var command = connection.CreateCommand())
 		{
 			command.CommandType = CommandType.Text; // or StoredProcedure
 			command.CommandText = "SELECT Id, Name FROM [dbo].[Lookups] WHERE IsDeleted = 0";
@@ -19,14 +19,15 @@ internal static class QueryExample
 				connection.Open();
 			}
 
-			using (var dataReader
+			using (var reader
 				= command.ExecuteReader(CommandBehavior.SingleResult | CommandBehavior.CloseConnection))
 			{
-				while (dataReader.Read())
+				while (reader.Read())
 				{
-					var id = dataReader["Id"];
-					var name = dataReader["Name"];
-					// Console.WriteLine handles a lot of additional parsing, checks, etc. that would normally be done.
+					var id = reader["Id"];
+					var name = reader["Name"];
+					// NOTE: ToString() handles a lot of additional parsing, checks, etc.
+					// that would normally be done by the developer.
 					Console.WriteLine($"Id = {id} | Name = {name}");
 				}
 			}

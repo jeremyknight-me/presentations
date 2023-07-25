@@ -12,7 +12,7 @@ internal static class UpdateExample
         using SqlCommand command = connection.CreateCommand();
         {
             command.CommandType = CommandType.Text; // or StoredProcedure
-            command.CommandText = "UPDATE dbo.[Lookup] SET IsDeleted = 1 WHERE Id = @id;";
+            command.CommandText = "UPDATE dbo.[Lookups] SET IsDeleted = 1 WHERE Id = @id;";
 
             var idParameter = command.CreateParameter();
             idParameter.DbType = DbType.Int32;
