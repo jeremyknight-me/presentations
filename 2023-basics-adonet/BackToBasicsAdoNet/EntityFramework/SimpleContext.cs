@@ -2,9 +2,9 @@
 
 namespace BackToBasicsAdoNet.EntityFramework;
 
-public class SandboxContext : DbContext
+public class SimpleContext : DbContext
 {
-    public SandboxContext(DbContextOptions<SandboxContext> options)
+    public SimpleContext(DbContextOptions<SimpleContext> options)
         : base(options)
     {
     }

@@ -33,10 +33,10 @@ internal static class IntegrationExample
 		}
 	}
 
-	private static SandboxContext MakeContext(string connectionString)
+	private static SimpleContext MakeContext(string connectionString)
 	{
-		var builder = new DbContextOptionsBuilder<SandboxContext>();
+		var builder = new DbContextOptionsBuilder<SimpleContext>();
 		builder.UseSqlServer(connectionString);
-		return new SandboxContext(builder.Options);
+		return new SimpleContext(builder.Options);
 	}
 }
