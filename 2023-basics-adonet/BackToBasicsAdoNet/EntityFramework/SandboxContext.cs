@@ -16,7 +16,8 @@ public class SandboxContext : DbContext
         var lookup = modelBuilder.Entity<Lookup>();
         lookup.ToTable("Lookups", "dbo");
         lookup.HasKey(x => x.Id);
-        lookup.Property(x => x.Name).HasColumnType("nvarchar(100)").IsRequired();
+        lookup.Property(x => x.Id).ValueGeneratedOnAdd();
+        lookup.Property(x => x.Name).HasMaxLength(100).IsUnicode().IsRequired();
         base.OnModelCreating(modelBuilder);
     }
 }

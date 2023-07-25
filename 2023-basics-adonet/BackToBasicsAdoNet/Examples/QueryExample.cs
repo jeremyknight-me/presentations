@@ -12,7 +12,7 @@ internal static class QueryExample
 		using (var command = connection.CreateCommand())
 		{
 			command.CommandType = CommandType.Text; // or StoredProcedure
-			command.CommandText = "SELECT Id, Name FROM [dbo].[Lookups] WHERE IsDeleted = 0";
+			command.CommandText = "SELECT TOP 10 Id, Name FROM [dbo].[Lookups] WHERE IsDeleted = 0";
 
 			if (connection.State != ConnectionState.Open)
 			{
