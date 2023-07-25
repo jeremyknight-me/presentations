@@ -19,13 +19,20 @@ internal class Program
 			};
 
             var enabled = true;
+
             if (!enabled) { Examples.QueryExample.Run(connectionStrings); }
             if (!enabled) { Examples.QueryByIdExample.Run(connectionStrings); }
+            
             if (!enabled) { Examples.InsertExample.Run(connectionStrings); }
+            if (!enabled) { Examples.BulkCopyExample.Run(connectionStrings); }
+            
             if (!enabled) { Examples.UpdateExample.Run(connectionStrings); }
             if (!enabled) { Examples.DeleteExample.Run(connectionStrings); }
-            if (!enabled) { Examples.BulkCopyExample.Run(connectionStrings); }
+            
             if (!enabled) { Examples.IntegrationExample.Run(connectionStrings); }
+
+            if (!enabled) { Examples.BulkInsertExample.Run(connectionStrings); }
+            // todo: multiple result set query
         }
         catch (Exception ex)
         {

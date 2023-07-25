@@ -13,7 +13,7 @@ internal static class InsertExample
 		command.CommandType = CommandType.Text; // or StoredProcedure
 		command.CommandText = "INSERT INTO dbo.[Lookups](Name) VALUES (@name); SELECT SCOPE_IDENTITY();";
 
-		var newName = "The New Guy";
+		var newName = "Inserted Record!";
 		var nameParameter = command.CreateParameter();
 		nameParameter.DbType = DbType.String;
 		nameParameter.Value = newName;
@@ -27,8 +27,6 @@ internal static class InsertExample
 		}
 
 		var newId = command.ExecuteScalar();
-		
-		// Console.WriteLine handles a lot of additional parsing, checks, etc. that would normally be done.
 		Console.WriteLine($"Id = {newId} | Name = {newName}");
 	}
 }

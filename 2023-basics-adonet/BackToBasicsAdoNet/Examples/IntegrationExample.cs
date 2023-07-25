@@ -1,4 +1,4 @@
-﻿using BackToBasicsAdoNet.EntityFramework.Simple;
+﻿using BackToBasicsAdoNet.EntityFramework.Chinook;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Data;
@@ -8,35 +8,32 @@ namespace BackToBasicsAdoNet.Examples;
 internal static class IntegrationExample
 {
 	internal static void Run(ConnectionStrings connectionStrings)
-    {
-		using var context = MakeContext(connectionStrings.Simple);
+	{
+		using var context = MakeContext(connectionStrings.Chinook);
 		var connection = context.Database.GetDbConnection();
 		using var command = connection.CreateCommand();
-		
 		command.CommandType = CommandType.Text; // or StoredProcedure
-		command.CommandText = "SELECT TOP 10 Id, Name FROM [dbo].[Lookups] WHERE IsDeleted = 0";
+		command.CommandText = "SELECT TOP 20 ArtistId, Name FROM dbo.Artist;";
 
 		if (connection.State != ConnectionState.Open)
 		{
 			connection.Open();
 		}
 
-		using var dataReader 
+		using var reader
 			= command.ExecuteReader(CommandBehavior.SingleResult | CommandBehavior.CloseConnection);
-		while (dataReader.Read())
+		while (reader.Read())
 		{
-			var id = dataReader["Id"];
-			var name = dataReader["Name"];
-			// NOTE: ToString() handles a lot of additional parsing, checks, etc.
-			// that would normally be done by the developer.
+			var id = reader.GetInt32("ArtistId");
+			var name = reader.GetString("Name");
 			Console.WriteLine($"Id = {id} | Name = {name}");
 		}
 	}
 
-	private static SimpleContext MakeContext(string connectionString)
+	private static ChinookContext MakeContext(string connectionString)
 	{
-		var builder = new DbContextOptionsBuilder<SimpleContext>();
+		var builder = new DbContextOptionsBuilder<ChinookContext>();
 		builder.UseSqlServer(connectionString);
-		return new SimpleContext(builder.Options);
+		return new ChinookContext(builder.Options);
 	}
 }

@@ -8,15 +8,15 @@ internal static class QueryByIdExample
 {
 	internal static void Run(ConnectionStrings connectionStrings)
     {
-		using (var connection = new SqlConnection(connectionStrings.Simple))
+		using (var connection = new SqlConnection(connectionStrings.Chinook))
 		using (var command = connection.CreateCommand())
 		{
 			command.CommandType = CommandType.Text; // or StoredProcedure
-			command.CommandText = "SELECT Id, Name FROM [dbo].[Lookups] WHERE Id = @id";
+			command.CommandText = "SELECT ArtistId, Name FROM dbo.Artist WHERE ArtistId = @id";
 
 			var idParameter = command.CreateParameter();
 			idParameter.DbType = DbType.Int32;
-			idParameter.Value = 2;
+			idParameter.Value = 137;
 			idParameter.ParameterName = "@id";
 
 			command.Parameters.Add(idParameter);
@@ -31,10 +31,8 @@ internal static class QueryByIdExample
 			{
 				while (reader.Read())
 				{
-					var id = reader["Id"];
-					var name = reader["Name"];
-					// NOTE: ToString() handles a lot of additional parsing, checks, etc.
-					// that would normally be done by the developer.
+					var id = reader.GetInt32("ArtistId");
+					var name = reader.GetString("Name");
 					Console.WriteLine($"Id = {id} | Name = {name}");
 				}
 			}
