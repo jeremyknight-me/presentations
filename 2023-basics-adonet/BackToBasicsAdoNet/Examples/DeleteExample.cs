@@ -5,12 +5,12 @@ using System.Transactions;
 
 namespace BackToBasicsAdoNet.Examples;
 
-public static class DeleteExample
+internal static class DeleteExample
 {
-    public static void Run()
+	internal static void Run(ConnectionStrings connectionStrings)
     {
 		using var scope = new TransactionScope();
-		using var connection = new SqlConnection(Settings.ConnectionString);
+		using var connection = new SqlConnection(connectionStrings.Simple);
 		using SqlCommand command = connection.CreateCommand();
 		command.CommandType = CommandType.Text; // or StoredProcedure
 		command.CommandText = "DELETE FROM dbo.[Lookup] WHERE Id = @id;";

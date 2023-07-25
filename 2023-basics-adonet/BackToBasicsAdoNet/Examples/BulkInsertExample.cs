@@ -3,11 +3,11 @@ using System.Data;
 
 namespace BackToBasicsAdoNet.Examples;
 
-public static class BulkInsertExample
+internal static class BulkInsertExample
 {
-    public static void Run()
+	internal static void Run(ConnectionStrings connectionStrings)
     {
-		using var connection = new SqlConnection(Settings.ConnectionString);
+		using var connection = new SqlConnection(connectionStrings.Simple);
 		using var bulk = new SqlBulkCopy(
 			connection,
 			SqlBulkCopyOptions.KeepNulls | SqlBulkCopyOptions.UseInternalTransaction,

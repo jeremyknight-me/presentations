@@ -4,11 +4,11 @@ using System.Data;
 
 namespace BackToBasicsAdoNet.Examples;
 
-public static class QueryExample
+internal static class QueryExample
 {
-    public static void Run()
+	internal static void Run(ConnectionStrings connectionStrings)
     {
-		using var connection = new SqlConnection(Settings.ConnectionString);
+		using var connection = new SqlConnection(connectionStrings.Simple);
 		using SqlCommand command = connection.CreateCommand();
 		command.CommandType = CommandType.Text; // or StoredProcedure
 		command.CommandText = "SELECT Id, Name FROM [dbo].[Lookup] WHERE IsDeleted = 0";

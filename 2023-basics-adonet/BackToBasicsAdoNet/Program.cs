@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.Extensions.Configuration;
 
 namespace BackToBasicsAdoNet;
 
@@ -8,13 +9,22 @@ internal class Program
     {
         try
         {
-            Examples.QueryExample.Run();
-            Examples.QueryByIdExample.Run();
-            Examples.InsertExample.Run();
-            Examples.UpdateExample.Run();
-            Examples.DeleteExample.Run();
-            Examples.BulkInsertExample.Run();
-            Examples.IntegrationExample.Run();
+			var configBuilder = new ConfigurationBuilder();
+			configBuilder.AddUserSecrets(typeof(Program).Assembly, true);
+			var config = configBuilder.Build();
+            var connectionStrings = new ConnectionStrings
+            {
+                Chinook = config.GetConnectionString(nameof(ConnectionStrings.Chinook)),
+                Simple = config.GetConnectionString(nameof(ConnectionStrings.Simple))
+			};
+
+			Examples.QueryExample.Run(connectionStrings);
+            //Examples.QueryByIdExample.Run(connectionStrings);
+            //Examples.InsertExample.Run(connectionStrings);
+            //Examples.UpdateExample.Run(connectionStrings);
+            //Examples.DeleteExample.Run(connectionStrings);
+            //Examples.BulkInsertExample.Run(connectionStrings);
+            //Examples.IntegrationExample.Run(connectionStrings);
         }
         catch (Exception ex)
         {

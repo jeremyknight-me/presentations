@@ -5,14 +5,11 @@ using System.Data;
 
 namespace BackToBasicsAdoNet.Examples;
 
-public static class IntegrationExample
+internal static class IntegrationExample
 {
-    public static void Run()
+	internal static void Run(ConnectionStrings connectionStrings)
     {
-        var builder = new DbContextOptionsBuilder<SandboxContext>();
-        builder.UseSqlServer(Settings.ConnectionString);
-		using var context = new SandboxContext(builder.Options);
-
+		using var context = MakeContext(connectionStrings.Simple);
 		var connection = context.Database.GetDbConnection();
 		using var command = connection.CreateCommand();
 		
@@ -33,5 +30,12 @@ public static class IntegrationExample
 			// Console.WriteLine handles a lot of additional parsing, checks, etc. that would normally be done.
 			Console.WriteLine($"Id = {id} | Name = {name}");
 		}
+	}
+
+	private static SandboxContext MakeContext(string connectionString)
+	{
+		var builder = new DbContextOptionsBuilder<SandboxContext>();
+		builder.UseSqlServer(connectionString);
+		return new SandboxContext(builder.Options);
 	}
 }
