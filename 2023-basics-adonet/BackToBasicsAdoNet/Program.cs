@@ -24,7 +24,7 @@ internal class Program
             if (!enabled) { Examples.InsertExample.Run(connectionStrings); }
             if (!enabled) { Examples.UpdateExample.Run(connectionStrings); }
             if (!enabled) { Examples.DeleteExample.Run(connectionStrings); }
-            if (!enabled) { Examples.BulkInsertExample.Run(connectionStrings); }
+            if (!enabled) { Examples.BulkCopyExample.Run(connectionStrings); }
             if (!enabled) { Examples.IntegrationExample.Run(connectionStrings); }
         }
         catch (Exception ex)

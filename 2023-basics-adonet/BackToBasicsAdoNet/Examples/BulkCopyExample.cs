@@ -3,7 +3,7 @@ using System.Data;
 
 namespace BackToBasicsAdoNet.Examples;
 
-internal static class BulkInsertExample
+internal static class BulkCopyExample
 {
 	internal static void Run(ConnectionStrings connectionStrings)
     {
