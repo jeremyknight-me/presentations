@@ -1,6 +1,5 @@
 ﻿using System;
 using BackToBasicsAdoNet.Examples;
-using Microsoft.Extensions.Configuration;
 
 namespace BackToBasicsAdoNet;
 
@@ -10,15 +9,7 @@ internal class Program
     {
         try
         {
-			var configBuilder = new ConfigurationBuilder();
-			configBuilder.AddUserSecrets(typeof(Program).Assembly, true);
-			var config = configBuilder.Build();
-            var connectionStrings = new ConnectionStrings
-            {
-                Chinook = config.GetConnectionString(nameof(ConnectionStrings.Chinook)),
-                Simple = config.GetConnectionString(nameof(ConnectionStrings.Simple))
-			};
-
+            var connectionStrings = ConnectionStrings.Create();
             var enabled = true;
 
             if (!enabled) { QueryExample.Run(connectionStrings); }

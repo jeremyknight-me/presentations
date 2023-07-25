@@ -36,5 +36,6 @@ internal static class BulkCopyExample
 		}
 
 		bulk.WriteToServer(table);
+		Console.WriteLine($"{bulk.RowsCopied} rows inserted");
 	}
 }

@@ -25,7 +25,7 @@ internal static class BulkInsertExample
 			connection.Open();
 		}
 
-		var numRowAffected = command.ExecuteNonQueryAsync();
+		var numRowAffected = command.ExecuteNonQuery();
 		scope.Complete();
 		Console.WriteLine($"{numRowAffected} rows inserted");
 	}
