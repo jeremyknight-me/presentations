@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
 	<PropertyGroup>
 		<OutputType>Exe</OutputType>
 		<LangVersion>11.0</LangVersion>
@@ -9,12 +8,10 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.1" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.9" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="7.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="EntityFramework\Chinook\" />
+	  <ProjectReference Include="..\BackToBasicsAdoNet.EntityFramework\BackToBasicsAdoNet.EntityFramework.csproj" />
 	</ItemGroup>
-
 </Project>
