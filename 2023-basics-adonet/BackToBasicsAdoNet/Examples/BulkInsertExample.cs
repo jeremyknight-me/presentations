@@ -1,6 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
 using System.Data;
-using System.Transactions;
 using System;
 using System.Linq;
 using BackToBasicsAdoNet.EntityFramework.Simple;
@@ -12,7 +11,7 @@ internal static class BulkInsertExample
 {
 	internal static void Run(ConnectionStrings connectionStrings)
 	{
-		using var scope = new TransactionScope();
+		using var scope = TransactionScopeFactory.Create();
 		using var connection = new SqlConnection(connectionStrings.Simple);
 		using SqlCommand command = connection.CreateCommand();
 		command.CommandType = CommandType.Text; // or StoredProcedure
@@ -26,7 +25,7 @@ internal static class BulkInsertExample
 			connection.Open();
 		}
 
-		var numRowAffected = command.ExecuteNonQuery();
+		var numRowAffected = command.ExecuteNonQueryAsync();
 		scope.Complete();
 		Console.WriteLine($"{numRowAffected} rows inserted");
 	}

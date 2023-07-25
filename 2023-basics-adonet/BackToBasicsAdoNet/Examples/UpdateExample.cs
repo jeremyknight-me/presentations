@@ -8,11 +8,11 @@ internal static class UpdateExample
 {
     internal static void Run(ConnectionStrings connectionStrings)
     {
-        using var connection = new SqlConnection(connectionStrings.Simple);
+		using var connection = new SqlConnection(connectionStrings.Simple);
         using SqlCommand command = connection.CreateCommand();
         {
             command.CommandType = CommandType.Text; // or StoredProcedure
-            command.CommandText = "UPDATE dbo.[Lookups] SET IsDeleted = 1 WHERE Id = @id;";
+            command.CommandText = "UPDATE dbo.Lookups SET IsDeleted = 1 WHERE Id = @id;";
 
             var idParameter = command.CreateParameter();
             idParameter.DbType = DbType.Int32;
