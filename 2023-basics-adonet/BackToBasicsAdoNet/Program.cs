@@ -18,13 +18,14 @@ internal class Program
                 Simple = config.GetConnectionString(nameof(ConnectionStrings.Simple))
 			};
 
-			Examples.QueryExample.Run(connectionStrings);
-            Examples.QueryByIdExample.Run(connectionStrings);
-            //Examples.InsertExample.Run(connectionStrings);
-            //Examples.UpdateExample.Run(connectionStrings);
-            //Examples.DeleteExample.Run(connectionStrings);
-            //Examples.BulkInsertExample.Run(connectionStrings);
-            Examples.IntegrationExample.Run(connectionStrings);
+            var enabled = true;
+            if (enabled) { Examples.QueryExample.Run(connectionStrings); }
+            if (!enabled) { Examples.QueryByIdExample.Run(connectionStrings); }
+            if (!enabled) { Examples.InsertExample.Run(connectionStrings); }
+            if (!enabled) { Examples.UpdateExample.Run(connectionStrings); }
+            if (!enabled) { Examples.DeleteExample.Run(connectionStrings); }
+            if (!enabled) { Examples.BulkInsertExample.Run(connectionStrings); }
+            if (!enabled) { Examples.IntegrationExample.Run(connectionStrings); }
         }
         catch (Exception ex)
         {
