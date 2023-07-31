@@ -1,9 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29009.5
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BackToBasicsAdoNet", "BackToBasicsAdoNet\BackToBasicsAdoNet.csproj", "{B83DAD8B-02AA-4CC6-8096-D838F7C611D2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EF11F9E5-F71B-438E-B6C2-9FEC998959BF}"
+	ProjectSection(SolutionItems) = preProject
+		Benchmarks.md = Benchmarks.md
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BackToBasicsAdoNet.EntityFramework", "BackToBasicsAdoNet.EntityFramework\BackToBasicsAdoNet.EntityFramework.csproj", "{EEF80D73-60B8-4E95-8E8C-B2A28E85AC6A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +23,10 @@ Global
 		{B83DAD8B-02AA-4CC6-8096-D838F7C611D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B83DAD8B-02AA-4CC6-8096-D838F7C611D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B83DAD8B-02AA-4CC6-8096-D838F7C611D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEF80D73-60B8-4E95-8E8C-B2A28E85AC6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEF80D73-60B8-4E95-8E8C-B2A28E85AC6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEF80D73-60B8-4E95-8E8C-B2A28E85AC6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEF80D73-60B8-4E95-8E8C-B2A28E85AC6A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

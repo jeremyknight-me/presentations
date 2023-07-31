@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace BackToBasicsAdoNet.EntityFramework;
+namespace BackToBasicsAdoNet.EntityFramework.Simple;
 
-public class SandboxContext : DbContext
+public class SimpleContext : DbContext
 {
-    public SandboxContext(DbContextOptions<SandboxContext> options)
+    public SimpleContext(DbContextOptions<SimpleContext> options)
         : base(options)
     {
     }
@@ -14,9 +14,10 @@ public class SandboxContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         var lookup = modelBuilder.Entity<Lookup>();
-        lookup.ToTable("Lookup", "dbo");
+        lookup.ToTable("Lookups", "dbo");
         lookup.HasKey(x => x.Id);
-        lookup.Property(x => x.Name).HasColumnType("nvarchar(100)").IsRequired();
+        lookup.Property(x => x.Id).ValueGeneratedOnAdd();
+        lookup.Property(x => x.Name).HasMaxLength(100).IsUnicode().IsRequired();
         base.OnModelCreating(modelBuilder);
     }
 }

@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<LangVersion>11.0</LangVersion>
+		<TargetFramework>net7.0</TargetFramework>
+		<UserSecretsId>4f7884ce-4d85-4933-9f53-e1f4b424c42e</UserSecretsId>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="BenchmarkDotNet" Version="0.13.6" />
+		<PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.1" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="7.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\BackToBasicsAdoNet.EntityFramework\BackToBasicsAdoNet.EntityFramework.csproj" />
+	</ItemGroup>
+</Project>
