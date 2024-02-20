@@ -5,11 +5,11 @@ namespace SystemUnderTest;
 
 #region No Provider
 
-public class AgeCalculator
+public class AgeCalculatorOriginal
 {
-    public int Calculate(DateTime birthday)
+    public int Calculate(DateOnly birthday)
     {
-        var now = DateTime.Today;
+        var now = DateOnly.FromDateTime(DateTime.Today);
         var age = now.Year - birthday.Year;
         if (birthday > now.AddYears(-age))
         {
@@ -24,31 +24,32 @@ public class AgeCalculator
 
 #region Provider
 
-//public class AgeCalculator
-//{
-//    private readonly IDateTimeProvider dateTime;
+public class AgeCalculatorUpdated
+{
+    private readonly IDateTimeProvider dateTime;
 
-//    public AgeCalculator(IDateTimeProvider dateTimeProvider)
-//    {
-//        this.dateTime = dateTimeProvider;
-//    }
+    public AgeCalculatorUpdated(IDateTimeProvider dateTimeProvider)
+    {
+        this.dateTime = dateTimeProvider;
+    }
 
-//    public AgeCalculator() : this(new DefaultDateTimeProvider())
-//    {
-//    }
+    public AgeCalculatorUpdated() 
+        : this(new DefaultDateTimeProvider())
+    {
+    }
 
-//    public int Calculate(in DateTime birthday)
-//    {
-//        var now = this.dateTime.Today;
-//        var age = now.Year - birthday.Year;
-//        if (birthday > now.AddYears(-age))
-//        {
-//            age--;
-//        }
+    public int Calculate(in DateOnly birthday)
+    {
+        var now = DateOnly.FromDateTime(this.dateTime.Today);
+        var age = now.Year - birthday.Year;
+        if (birthday > now.AddYears(-age))
+        {
+            age--;
+        }
 
-//        return age;
-//    }
-//}
+        return age;
+    }
+}
 
 #endregion
 
