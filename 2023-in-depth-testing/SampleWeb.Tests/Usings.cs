@@ -1,2 +1,2 @@
-﻿global using Moq;
+﻿global using FakeItEasy;
 global using Xunit;

@@ -1,5 +1,4 @@
-﻿using System.Linq.Expressions;
-using DataPersistence;
+﻿using DataPersistence;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using SampleWeb.Endpoints;
@@ -36,13 +35,14 @@ public class LookupGetAllEndpointTests
 
     private async Task<IResult> RunTest(IReadOnlyList<Lookup> data)
     {
-        var mockRepo = new Mock<ILookupRepository>();
-        Expression<Func<ILookupRepository, IReadOnlyList<Lookup>>> repoMethod = x => x.GetAllAsync().Result;
-        var sut = new LookupGetAllEndpoint(mockRepo.Object);
-        mockRepo.Setup(repoMethod).Returns(data);
+        var repo = A.Fake<ILookupRepository>();
+        var call = A.CallTo(() => repo.GetAllAsync());
+        call.Returns(data);
 
+        var sut = new LookupGetAllEndpoint(repo);
         var result = await sut.Execute();
-        mockRepo.Verify(repoMethod, Times.Once);
+
+        call.MustHaveHappenedOnceExactly();
         return result;
     }
 }
