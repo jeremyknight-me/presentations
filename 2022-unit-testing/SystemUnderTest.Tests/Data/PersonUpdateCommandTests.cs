@@ -1,4 +1,4 @@
-﻿using Moq;
+﻿using FakeItEasy;
 using SystemUnderTest.Data;
 using Xunit;
 
@@ -9,23 +9,28 @@ public class PersonUpdateCommandTests
     [Fact]
     public void Execute_NoPerson_False()
     {
-        var mockPersonRepo = new Mock<IGetPersonByIdQuery>();
-        mockPersonRepo.Setup(x => x.GetById(It.IsAny<int>())).Returns((Person)null);
-        var command = new PersonUpdateCommand(mockPersonRepo.Object);
-        var actual = command.Execute(new Person());
-        mockPersonRepo.Verify(x => x.GetById(It.IsAny<int>()), Times.Once);
-        Assert.False(actual);
+        var repository = A.Fake<IGetPersonByIdQuery>();
+        var call = A.CallTo(() => repository.GetById(A<int>.Ignored));
+        call.Returns(null);
 
+        var command = new PersonUpdateCommand(repository);
+        var actual = command.Execute(new Person());
+        
+        call.MustHaveHappenedOnceExactly();
+        Assert.False(actual);
     }
 
     [Fact]
     public void Execute_Person_True()
     {
-        var mockPersonRepo = new Mock<IGetPersonByIdQuery>();
-        mockPersonRepo.Setup(x => x.GetById(It.IsAny<int>())).Returns(new Person());
-        var command = new PersonUpdateCommand(mockPersonRepo.Object);
+        var repository = A.Fake<IGetPersonByIdQuery>();
+        var call = A.CallTo(() => repository.GetById(A<int>._));
+        call.Returns(new Person());
+        
+        var command = new PersonUpdateCommand(repository);
         var actual = command.Execute(new Person());
-        mockPersonRepo.Verify(x => x.GetById(It.IsAny<int>()), Times.Once);
+        
+        call.MustHaveHappenedOnceExactly();
         Assert.True(actual);
     }
 }

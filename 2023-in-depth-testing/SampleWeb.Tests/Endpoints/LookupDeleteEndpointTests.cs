@@ -1,5 +1,4 @@
-﻿using System.Linq.Expressions;
-using Microsoft.AspNetCore.Http.HttpResults;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
 using SampleWeb.Endpoints;
 using SampleWeb.Repositories;
 
@@ -10,13 +9,13 @@ public class LookupDeleteEndpointTests
     [Fact]
     public async Task Execute_ReturnsNoContent()
     {
-        var mockRepo = new Mock<ILookupRepository>();
-        Expression<Func<ILookupRepository, Task>> repoMethod = x => x.DeleteAsync(It.IsAny<int>());
-        mockRepo.Setup(repoMethod);
-        var sut = new LookupDeleteEndpoint(mockRepo.Object);
+        var repo = A.Fake<ILookupRepository>();
+        var call = A.CallTo(() => repo.DeleteAsync(A<int>._));
 
+        var sut = new LookupDeleteEndpoint(repo);
         var result = await sut.Execute(0);
-        mockRepo.Verify(repoMethod, Times.Once);
+
+        call.MustHaveHappenedOnceExactly();
         Assert.IsType<NoContent>(result);
     }
 }
