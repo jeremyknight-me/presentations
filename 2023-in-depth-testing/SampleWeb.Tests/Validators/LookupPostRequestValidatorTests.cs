@@ -1,12 +1,11 @@
 ﻿using FluentValidation.TestHelper;
-using SampleWeb.Requests;
-using SampleWeb.Validators;
+using SampleWeb.Endpoints.Lookups.Create;
 
 namespace SampleWeb.Tests.Validators;
 
 public class LookupPostRequestValidatorTests
 {
-    private readonly LookupPostRequestValidator sut;
+    private readonly LookupCreateRequestValidator sut;
 
     public LookupPostRequestValidatorTests()
     {
@@ -18,7 +17,7 @@ public class LookupPostRequestValidatorTests
     [InlineData("abc 123")]
     public void Validate_NoErrors(string name)
     {
-        var request = new LookupPostRequest { Name = name };
+        var request = new LookupCreateRequest { Name = name };
         var result = this.sut.TestValidate(request);
         result.ShouldNotHaveValidationErrorFor(x => x.Name);
     }
@@ -30,7 +29,7 @@ public class LookupPostRequestValidatorTests
     [InlineData("abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz")]
     public void Validate_Errors(string name)
     {
-        var request = new LookupPostRequest { Name = name };
+        var request = new LookupCreateRequest { Name = name };
         var result = this.sut.TestValidate(request);
         result.ShouldHaveValidationErrorFor(x => x.Name);
     }

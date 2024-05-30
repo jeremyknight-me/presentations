@@ -3,8 +3,8 @@ using System.Net.Http.Json;
 using System.Text.Json;
 using DataPersistence;
 using Microsoft.Extensions.DependencyInjection;
-using SampleWeb.Requests;
-using SampleWeb.Responses;
+using SampleWeb.Endpoints.Lookups;
+using SampleWeb.Endpoints.Lookups.Create;
 
 namespace SampleWeb.IntegrationTests.DatabasePer;
 
@@ -46,7 +46,7 @@ public class LookupEndpointsTests : IClassFixture<SampleWebApiFactory>
     [Fact]
     public async Task Post()
     {
-        var request = new LookupPostRequest { Name = "Hello World!" };
+        var request = new LookupCreateRequest { Name = "Hello World!" };
         var response = await this.httpClient.PostAsJsonAsync("/lookups", request);
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.Created, response.StatusCode);

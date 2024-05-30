@@ -1,6 +1,4 @@
-﻿using SampleWeb.Repositories;
-
-namespace SampleWeb.Endpoints;
+﻿namespace SampleWeb.Endpoints.Lookups.Delete;
 
 internal sealed class LookupDeleteEndpoint
 {
@@ -14,6 +12,6 @@ internal sealed class LookupDeleteEndpoint
     public async Task<IResult> Execute(int id)
     {
         await this.repository.DeleteAsync(id);
-        return Results.NoContent();   
+        return Results.NoContent();
     }
 }

@@ -1,23 +1,20 @@
 ﻿using DataPersistence;
 using FluentValidation;
-using SampleWeb.Repositories;
-using SampleWeb.Requests;
-using SampleWeb.Responses;
 
-namespace SampleWeb.Endpoints;
+namespace SampleWeb.Endpoints.Lookups.Create;
 
-internal sealed class LookupPostEndpoint
+internal sealed class LookupCreateEndpoint
 {
     private readonly ILookupRepository repository;
-    private readonly IValidator<LookupPostRequest> validator;
+    private readonly IValidator<LookupCreateRequest> validator;
 
-    public LookupPostEndpoint(ILookupRepository lookupRepository, IValidator<LookupPostRequest> requestValidator)
+    public LookupCreateEndpoint(ILookupRepository lookupRepository, IValidator<LookupCreateRequest> requestValidator)
     {
         this.repository = lookupRepository;
         this.validator = requestValidator;
     }
 
-    public async Task<IResult> Execute(LookupPostRequest request)
+    public async Task<IResult> Execute(LookupCreateRequest request)
     {
         var validationResult = this.validator.Validate(request);
         if (!validationResult.IsValid)

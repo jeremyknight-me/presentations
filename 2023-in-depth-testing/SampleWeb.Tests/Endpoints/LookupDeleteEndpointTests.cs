@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http.HttpResults;
-using SampleWeb.Endpoints;
-using SampleWeb.Repositories;
+using SampleWeb.Endpoints.Lookups;
+using SampleWeb.Endpoints.Lookups.Delete;
 
 namespace SampleWeb.Tests.Endpoints;
 

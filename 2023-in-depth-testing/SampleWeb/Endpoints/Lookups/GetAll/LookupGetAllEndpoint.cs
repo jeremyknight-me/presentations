@@ -1,16 +1,13 @@
-﻿using SampleWeb.Repositories;
-using SampleWeb.Responses;
-
-namespace SampleWeb.Endpoints;
+﻿namespace SampleWeb.Endpoints.Lookups.GetAll;
 
 internal sealed class LookupGetAllEndpoint
 {
-	private readonly ILookupRepository repository;
+    private readonly ILookupRepository repository;
 
-	public LookupGetAllEndpoint(ILookupRepository lookupRepository)
+    public LookupGetAllEndpoint(ILookupRepository lookupRepository)
     {
-		this.repository = lookupRepository;
-	}
+        this.repository = lookupRepository;
+    }
 
     public async Task<IResult> Execute()
     {
@@ -20,8 +17,8 @@ internal sealed class LookupGetAllEndpoint
             var response = lookups
                 .Select(x => LookupResponse.Create(x));
             return Results.Ok(response);
-        } 
-		catch (Exception ex)
+        }
+        catch (Exception ex)
         {
             throw;
         }

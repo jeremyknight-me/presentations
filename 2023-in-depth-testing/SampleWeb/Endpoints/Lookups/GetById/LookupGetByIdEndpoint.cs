@@ -1,7 +1,4 @@
-﻿using SampleWeb.Repositories;
-using SampleWeb.Responses;
-
-namespace SampleWeb.Endpoints;
+﻿namespace SampleWeb.Endpoints.Lookups.GetById;
 
 internal sealed class LookupGetByIdEndpoint
 {
@@ -13,14 +10,14 @@ internal sealed class LookupGetByIdEndpoint
     }
 
     public async Task<IResult> Execute(int id)
-	{
-		var lookup = await this.repository.GetByIdAsync(id);
+    {
+        var lookup = await this.repository.GetByIdAsync(id);
         if (lookup is null)
         {
             return Results.NotFound();
         }
 
         var response = LookupResponse.Create(lookup);
-		return Results.Ok(response);
-	}
+        return Results.Ok(response);
+    }
 }

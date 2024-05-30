@@ -1,5 +1,5 @@
 ﻿using System.Net.Http.Json;
-using SampleWeb.Responses;
+using SampleWeb.Endpoints.Lookups;
 
 namespace SampleWeb.IntegrationTests.WebApi;
 

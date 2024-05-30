@@ -1,7 +1,7 @@
 ﻿using DataPersistence;
 using Microsoft.EntityFrameworkCore;
 
-namespace SampleWeb.Repositories;
+namespace SampleWeb.Endpoints.Lookups;
 
 public interface ILookupRepository
 {
@@ -13,12 +13,12 @@ public interface ILookupRepository
 
 internal sealed class LookupRepository : ILookupRepository
 {
-	private readonly SimpleContext context;
+    private readonly SimpleContext context;
 
-	public LookupRepository(SimpleContext simpleContext)
+    public LookupRepository(SimpleContext simpleContext)
     {
-		this.context = simpleContext;
-	}
+        this.context = simpleContext;
+    }
 
     public async Task AddAsync(Lookup lookup)
     {
@@ -33,9 +33,9 @@ internal sealed class LookupRepository : ILookupRepository
         await this.context.SaveChangesAsync();
     }
 
-    public async Task<IReadOnlyList<Lookup>> GetAllAsync() 
-		=> await this.context.Lookups.ToListAsync();
+    public async Task<IReadOnlyList<Lookup>> GetAllAsync()
+        => await this.context.Lookups.ToListAsync();
 
-	public async Task<Lookup?> GetByIdAsync(int id)
-		=> await this.context.Lookups.FindAsync(id);
+    public async Task<Lookup?> GetByIdAsync(int id)
+        => await this.context.Lookups.FindAsync(id);
 }
