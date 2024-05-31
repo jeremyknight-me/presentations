@@ -1,5 +1,5 @@
-﻿using DataPersistence;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using SampleWeb.Persistence;
 
 namespace SampleWeb.Endpoints.Lookups;
 

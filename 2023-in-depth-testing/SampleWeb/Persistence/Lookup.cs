@@ -1,4 +1,4 @@
-﻿namespace DataPersistence;
+﻿namespace SampleWeb.Persistence;
 
 public sealed class Lookup
 {

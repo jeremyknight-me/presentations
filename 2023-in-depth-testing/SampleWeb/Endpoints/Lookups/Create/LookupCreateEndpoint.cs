@@ -1,5 +1,5 @@
-﻿using DataPersistence;
-using FluentValidation;
+﻿using FluentValidation;
+using SampleWeb.Persistence;
 
 namespace SampleWeb.Endpoints.Lookups.Create;
 

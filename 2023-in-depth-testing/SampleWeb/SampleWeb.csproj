@@ -1,11 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 	<PropertyGroup>
 		<TargetFramework>net8.0</TargetFramework>
+		<UserSecretsId>d9873370-6109-46fa-88ef-340adf101e4b</UserSecretsId>
 	</PropertyGroup>
 
 	<ItemGroup>
+        <PackageReference Include="Bogus" />
 		<PackageReference Include="FluentValidation.DependencyInjectionExtensions" />
 		<PackageReference Include="Microsoft.AspNetCore.OpenApi" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" />
 		<PackageReference Include="Swashbuckle.AspNetCore" />
 	</ItemGroup>
 
@@ -13,9 +16,5 @@
 		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
 			<_Parameter1>SampleWeb.Tests</_Parameter1>
 		</AssemblyAttribute>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <ProjectReference Include="..\DataPersistence\DataPersistence.csproj" />
 	</ItemGroup>
 </Project>

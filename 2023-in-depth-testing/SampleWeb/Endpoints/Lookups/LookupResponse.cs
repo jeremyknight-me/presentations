@@ -1,4 +1,4 @@
-﻿using DataPersistence;
+﻿using SampleWeb.Persistence;
 
 namespace SampleWeb.Endpoints.Lookups;
 

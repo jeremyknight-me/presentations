@@ -1,5 +1,5 @@
-﻿using DataPersistence;
-using FluentValidation;
+﻿using FluentValidation;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using SampleWeb.Endpoints;
 using SampleWeb.Endpoints.Guids;
@@ -8,6 +8,7 @@ using SampleWeb.Endpoints.Lookups.Create;
 using SampleWeb.Endpoints.Lookups.Delete;
 using SampleWeb.Endpoints.Lookups.GetAll;
 using SampleWeb.Endpoints.Lookups.GetById;
+using SampleWeb.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
@@ -16,7 +17,13 @@ services.AddSwaggerGen();
 
 services.AddDbContext<SimpleContext>(options =>
 {
-    var connectionString = ConnectionStringFactory.Make();
+    var baseConnection = builder.Configuration.GetConnectionString("Simple");
+    var connectionStringBuilder = new SqlConnectionStringBuilder(baseConnection)
+    {
+        // get password from user secrets file
+        Password = builder.Configuration.GetValue<string>("DbPassword")
+    };
+    var connectionString = connectionStringBuilder.ToString();
     options.UseSqlServer(connectionString);
 });
 

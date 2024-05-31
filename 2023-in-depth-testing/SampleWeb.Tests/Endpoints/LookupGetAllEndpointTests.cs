@@ -1,8 +1,8 @@
-﻿using DataPersistence;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using SampleWeb.Endpoints.Lookups;
 using SampleWeb.Endpoints.Lookups.GetAll;
+using SampleWeb.Persistence;
 
 namespace SampleWeb.Tests.Endpoints;
 

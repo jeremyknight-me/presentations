@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace DataPersistence;
+namespace SampleWeb.Persistence;
 
 public class SimpleContext : DbContext
 {

@@ -1,6 +1,6 @@
 ﻿using Bogus;
 
-namespace DataPersistence;
+namespace SampleWeb.Persistence;
 
 public static class LookupFakerFactory
 {
