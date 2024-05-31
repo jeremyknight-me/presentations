@@ -2,6 +2,7 @@
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using SampleWeb.Endpoints;
+using SampleWeb.Endpoints.Guids;
 using SampleWeb.Endpoints.Lookups;
 using SampleWeb.Endpoints.Lookups.Create;
 using SampleWeb.Endpoints.Lookups.Delete;
@@ -21,8 +22,9 @@ services.AddDbContext<SimpleContext>(options =>
 
 services.AddValidatorsFromAssemblyContaining<Program>();
 
-services.AddScoped<ILookupRepository, LookupRepository>();
+services.AddScoped<GuidGetEndpoint>();
 
+services.AddScoped<ILookupRepository, LookupRepository>();
 services.AddScoped<LookupGetAllEndpoint>();
 services.AddScoped<LookupGetByIdEndpoint>();
 services.AddScoped<LookupCreateEndpoint>();
