@@ -1,0 +1,11 @@
+<Project>
+    <PropertyGroup>
+        <LangVersion>12.0</LangVersion>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+        
+        <Authors>Jeremy Knight</Authors>
+        <Copyright>Jeremy Knight</Copyright>
+    </PropertyGroup>
+</Project>
