@@ -1,0 +1,28 @@
+services:
+  simpleapi:
+    image: ${DOCKER_REGISTRY-}simpleapi
+    build:
+      context: .
+      dockerfile: SimpleApi/Dockerfile
+    user: root # change this for production !!!!
+    volumes:
+      - data_sqlite:/data/sqlite
+ 
+  # Only needed for dev/test
+  sqlitebrowser:
+    container_name: sqlitebrowser
+    image: linuxserver/sqlitebrowser
+    ports:
+      - "3000:3000"
+    depends_on:
+      - simpleapi
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=American/Chicago
+      - ENABLE_UWSGI=true
+    volumes:
+      - data_sqlite:/data/db
+
+volumes:
+  data_sqlite:

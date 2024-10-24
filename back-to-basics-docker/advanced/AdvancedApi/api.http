@@ -1,0 +1,33 @@
+# For more info on HTTP files go to https://aka.ms/vs/httpfile
+@url = https://localhost:61834
+
+###
+
+GET {{url}}/healthz
+
+###
+
+GET {{url}}/todos
+
+###
+
+POST {{url}}/todos
+Content-Type: application/json
+
+{
+    "text": "lorem ipsum"
+}
+
+
+###
+
+PUT {{url}}/todos/1
+Content-Type: application/json
+
+{
+    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada nisl vel lorem tempor malesuada."
+}
+
+###
+
+DELETE {{url}}/todos/1

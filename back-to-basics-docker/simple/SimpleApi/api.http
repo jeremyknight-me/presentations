@@ -1,0 +1,29 @@
+# For more info on HTTP files go to https://aka.ms/vs/httpfile
+@url = http://localhost:57005/todos
+
+###
+
+GET {{url}}
+
+###
+
+POST {{url}}
+Content-Type: application/json
+
+{
+    "text": "lorem ipsum"
+}
+
+
+###
+
+PUT {{url}}/1
+Content-Type: application/json
+
+{
+    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada nisl vel lorem tempor malesuada."
+}
+
+###
+
+DELETE {{url}}/1
