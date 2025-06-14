@@ -17,7 +17,8 @@ public class GuidEndpointsTests : IClassFixture<SampleWebApiFactory>
     [Fact]
     public async Task Get()
     {
-        var response = await this.httpClient.GetFromJsonAsync<GuidResponse>("/guids", TestContext.Current.CancellationToken);
+        var response = await this.httpClient
+            .GetFromJsonAsync<GuidResponse>("/guids", TestContext.Current.CancellationToken);
         Assert.NotNull(response);
         Assert.NotEqual(Guid.Empty, response.Guid);
     }

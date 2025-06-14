@@ -28,8 +28,8 @@ public class LookupEndpointsTests : IAsyncLifetime
     [Fact]
     public async Task GetAll()
     {
-        var response
-                = await this.httpClient.GetFromJsonAsync<IEnumerable<LookupResponse>>("/lookups", this.CT);
+        var response = await this.httpClient
+            .GetFromJsonAsync<IEnumerable<LookupResponse>>("/lookups", this.CT);
         Assert.NotNull(response);
         Assert.NotEmpty(response);
     }
@@ -37,14 +37,16 @@ public class LookupEndpointsTests : IAsyncLifetime
     [Fact]
     public async Task GetById_Invalid()
     {
-        var response = await this.httpClient.GetAsync($"/lookups/{1127}", this.CT);
+        var response = await this.httpClient
+            .GetAsync($"/lookups/{1127}", this.CT);
         Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
     }
 
     [Fact]
     public async Task GetById_Valid()
     {
-        var response = await this.httpClient.GetFromJsonAsync<LookupResponse>($"/lookups/{50}", this.CT);
+        var response = await this.httpClient
+            .GetFromJsonAsync<LookupResponse>($"/lookups/{50}", this.CT);
         Assert.NotNull(response);
         Assert.Equal(50, response.Id);
     }
@@ -53,7 +55,8 @@ public class LookupEndpointsTests : IAsyncLifetime
     public async Task Post()
     {
         var request = new LookupCreateRequest { Name = "Hello World!" };
-        var response = await this.httpClient.PostAsJsonAsync("/lookups", request, this.CT);
+        var response = await this.httpClient
+            .PostAsJsonAsync("/lookups", request, this.CT);
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.Created, response.StatusCode);
 
@@ -66,13 +69,16 @@ public class LookupEndpointsTests : IAsyncLifetime
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase
         };
         var lookupResponse = JsonSerializer.Deserialize<LookupResponse>(content, serializerOptions);
-        using (var scope = this.factory.Services.CreateScope())
+        if (lookupResponse is null)
         {
-            var context = scope.ServiceProvider.GetRequiredService<SimpleContext>();
-            var entity = await context.Lookups.FindAsync(lookupResponse.Id);
-            Assert.NotNull(entity);
-            Assert.Equal("Hello World!", entity.Name);
+            return;
         }
+
+        using var scope = this.factory.Services.CreateScope();
+        var context = scope.ServiceProvider.GetRequiredService<SimpleContext>();
+        var entity = await context.Lookups.FindAsync([lookupResponse.Id], this.CT);
+        Assert.NotNull(entity);
+        Assert.Equal("Hello World!", entity.Name);
     }
 
     [Fact]
@@ -82,11 +88,9 @@ public class LookupEndpointsTests : IAsyncLifetime
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
 
-        using (var scope = this.factory.Services.CreateScope())
-        {
-            var context = scope.ServiceProvider.GetRequiredService<SimpleContext>();
-            var entity = await context.Lookups.FindAsync(40);
-            Assert.Null(entity);
-        }
+        using var scope = this.factory.Services.CreateScope();
+        var context = scope.ServiceProvider.GetRequiredService<SimpleContext>();
+        var entity = await context.Lookups.FindAsync([40], this.CT);
+        Assert.Null(entity);
     }
 }

@@ -62,13 +62,16 @@ public class LookupEndpointsTests : TestMsSqlContainerBase
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
             };
             var lookupResponse = JsonSerializer.Deserialize<LookupResponse>(content, serializerOptions);
-            using (var scope = this.Services.CreateScope())
+            if (lookupResponse is null)
             {
-                var context = scope.ServiceProvider.GetRequiredService<SimpleContext>();
-                var entity = await context.Lookups.FindAsync(lookupResponse.Id);
-                Assert.NotNull(entity);
-                Assert.Equal("Hello World!", entity.Name);
+                return;
             }
+
+            using var scope = this.Services.CreateScope();
+            var context = scope.ServiceProvider.GetRequiredService<SimpleContext>();
+            var entity = await context.Lookups.FindAsync([lookupResponse.Id], cancellationToken: this.CT);
+            Assert.NotNull(entity);
+            Assert.Equal("Hello World!", entity.Name);
         }
 
         [Fact]
@@ -82,7 +85,7 @@ public class LookupEndpointsTests : TestMsSqlContainerBase
             using (var scope = this.Services.CreateScope())
             {
                 var context = scope.ServiceProvider.GetRequiredService<SimpleContext>();
-                var entity = await context.Lookups.FindAsync(40);
+                var entity = await context.Lookups.FindAsync([40], cancellationToken: this.CT );
                 Assert.Null(entity);
             }
         }

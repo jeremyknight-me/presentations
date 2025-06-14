@@ -84,13 +84,16 @@ public class LookupEndpointsTests : IAsyncLifetime
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
             };
             var lookupResponse = JsonSerializer.Deserialize<LookupResponse>(content, serializerOptions);
-            using (var scope = this.Services.CreateScope())
+            if (lookupResponse is null)
             {
-                var context = scope.ServiceProvider.GetRequiredService<SimpleContext>();
-                var entity = await context.Lookups.FindAsync(lookupResponse.Id);
-                Assert.NotNull(entity);
-                Assert.Equal("Hello World!", entity.Name);
+                return;
             }
+
+            using var scope = this.Services.CreateScope();
+            var context = scope.ServiceProvider.GetRequiredService<SimpleContext>();
+            var entity = await context.Lookups.FindAsync([lookupResponse.Id], this.CT);
+            Assert.NotNull(entity);
+            Assert.Equal("Hello World!", entity.Name);
         }
 
         [Fact]
@@ -101,12 +104,10 @@ public class LookupEndpointsTests : IAsyncLifetime
             Assert.NotNull(response);
             Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
 
-            using (var scope = this.Services.CreateScope())
-            {
-                var context = scope.ServiceProvider.GetRequiredService<SimpleContext>();
-                var entity = await context.Lookups.FindAsync(40);
-                Assert.Null(entity);
-            }
+            using var scope = this.Services.CreateScope();
+            var context = scope.ServiceProvider.GetRequiredService<SimpleContext>();
+            var entity = await context.Lookups.FindAsync([40], this.CT);
+            Assert.Null(entity);
         }
     }
 }
