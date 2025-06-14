@@ -9,7 +9,7 @@ using SampleWeb.Endpoints.Lookups.Create;
 using SampleWeb.Persistence;
 using Testcontainers.MsSql;
 
-namespace SampleWeb.IntegrationTests.DatabasePer;
+namespace SampleWeb.IntegrationTests.DatabasePer.V1.Standalone;
 
 public class LookupEndpointsTests : IAsyncLifetime
 {
@@ -34,8 +34,9 @@ public class LookupEndpointsTests : IAsyncLifetime
 
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
+            builder.UseEnvironment("Testing");
             builder.UseSetting("URLS", "https://+");
-            builder.UseSetting("ConnectionStrings:EntityCreation", this.connectionString);
+            builder.UseSetting("ConnectionStrings:Simple", this.connectionString);
         }
 
         [Fact]
@@ -43,7 +44,7 @@ public class LookupEndpointsTests : IAsyncLifetime
         {
             using var httpClient = this.CreateClient();
             var response
-                    = await httpClient.GetFromJsonAsync<IEnumerable<LookupResponse>>("/lookups", this.CT);
+                = await httpClient.GetFromJsonAsync<IEnumerable<LookupResponse>>("/lookups", this.CT);
             Assert.NotNull(response);
             Assert.NotEmpty(response);
         }

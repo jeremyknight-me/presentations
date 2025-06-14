@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using System.Runtime.CompilerServices;
+using FluentValidation;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using SampleWeb.Endpoints;
@@ -18,11 +19,13 @@ services.AddSwaggerGen();
 services.AddDbContext<SimpleContext>(options =>
 {
     var baseConnection = builder.Configuration.GetConnectionString("Simple");
-    var connectionStringBuilder = new SqlConnectionStringBuilder(baseConnection)
+    var connectionStringBuilder = new SqlConnectionStringBuilder(baseConnection);
+    if (!builder.Environment.IsEnvironment("Testing"))
     {
         // get password from user secrets file
-        Password = builder.Configuration.GetValue<string>("DbPassword")
-    };
+        connectionStringBuilder.Password = builder.Configuration.GetValue<string>("DbPassword");
+    }
+
     var connectionString = connectionStringBuilder.ToString();
     options.UseSqlServer(connectionString);
 });
@@ -48,6 +51,14 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseMinimalEndpoints();
+
+if (app.Environment.IsEnvironment("Testing"))
+{
+    using var scope = app.Services.CreateScope();
+    var context = scope.ServiceProvider.GetRequiredService<SimpleContext>();
+    await context.Database.EnsureCreatedAsync();
+}
+
 app.Run();
 
 public partial class Program
