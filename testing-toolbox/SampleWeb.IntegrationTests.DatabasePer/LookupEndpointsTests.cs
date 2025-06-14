@@ -15,10 +15,10 @@ public class LookupEndpointsTests : IAsyncLifetime
 {
     private readonly MsSqlContainer container = new MsSqlBuilder().Build();
 
-    public async Task InitializeAsync()
+    public async ValueTask InitializeAsync()
         => await this.container.StartAsync();
 
-    public async Task DisposeAsync()
+    public async ValueTask DisposeAsync()
         => await this.container.DisposeAsync();
 
     public sealed class Api : WebApplicationFactory<Program>, IClassFixture<LookupEndpointsTests>
@@ -30,7 +30,7 @@ public class LookupEndpointsTests : IAsyncLifetime
             this.connectionString = endpointsTests.container.GetConnectionString();
         }
 
-        //public CancellationToken CT => TestContext.Current.CancellationToken;
+        public CancellationToken CT => TestContext.Current.CancellationToken;
 
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
@@ -43,7 +43,7 @@ public class LookupEndpointsTests : IAsyncLifetime
         {
             using var httpClient = this.CreateClient();
             var response
-                    = await httpClient.GetFromJsonAsync<IEnumerable<LookupResponse>>("/lookups");
+                    = await httpClient.GetFromJsonAsync<IEnumerable<LookupResponse>>("/lookups", this.CT);
             Assert.NotNull(response);
             Assert.NotEmpty(response);
         }
@@ -52,7 +52,7 @@ public class LookupEndpointsTests : IAsyncLifetime
         public async Task GetById_Invalid()
         {
             using var httpClient = this.CreateClient();
-            var response = await httpClient.GetAsync($"/lookups/{1127}");
+            var response = await httpClient.GetAsync($"/lookups/{1127}", this.CT);
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
         }
 
@@ -60,7 +60,7 @@ public class LookupEndpointsTests : IAsyncLifetime
         public async Task GetById_Valid()
         {
             using var httpClient = this.CreateClient();
-            var response = await httpClient.GetFromJsonAsync<LookupResponse>($"/lookups/{50}");
+            var response = await httpClient.GetFromJsonAsync<LookupResponse>($"/lookups/{50}", this.CT);
             Assert.NotNull(response);
             Assert.Equal(50, response.Id);
         }
@@ -70,11 +70,11 @@ public class LookupEndpointsTests : IAsyncLifetime
         {
             var request = new LookupCreateRequest { Name = "Hello World!" };
             using var httpClient = this.CreateClient();
-            var response = await httpClient.PostAsJsonAsync("/lookups", request);
+            var response = await httpClient.PostAsJsonAsync("/lookups", request, this.CT);
             Assert.NotNull(response);
             Assert.Equal(HttpStatusCode.Created, response.StatusCode);
 
-            var content = await response.Content.ReadAsStringAsync();
+            var content = await response.Content.ReadAsStringAsync(cancellationToken: this.CT);
             var serializerOptions = new JsonSerializerOptions
             {
                 AllowTrailingCommas = true,
@@ -96,7 +96,7 @@ public class LookupEndpointsTests : IAsyncLifetime
         public async Task Delete()
         {
             using var httpClient = this.CreateClient();
-            var response = await httpClient.DeleteAsync($"/lookups/{40}");
+            var response = await httpClient.DeleteAsync($"/lookups/{40}", this.CT);
             Assert.NotNull(response);
             Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
 

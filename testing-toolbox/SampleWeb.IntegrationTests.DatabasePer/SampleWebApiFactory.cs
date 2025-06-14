@@ -32,9 +32,9 @@ public class SampleWebApiFactory : WebApplicationFactory<Program>, IAsyncLifetim
             context.Database.EnsureCreated();
         });
 
-    public async Task InitializeAsync()
+    public async ValueTask InitializeAsync()
         => await this.testContainer.StartAsync();
 
-    public new async Task DisposeAsync()
+    public new async ValueTask DisposeAsync()
         => await this.testContainer.DisposeAsync();
 }

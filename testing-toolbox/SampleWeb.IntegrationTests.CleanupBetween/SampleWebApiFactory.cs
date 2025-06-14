@@ -40,7 +40,7 @@ public class SampleWebApiFactory : WebApplicationFactory<Program>, IAsyncLifetim
     public async Task ResetDatabaseAsync()
         => await this.respawner.ResetAsync(this.connection);
 
-    public async Task InitializeAsync()
+    public async ValueTask InitializeAsync()
     {
         await this.testContainer.StartAsync();
         this.connection = new SqlConnection(this.testContainer.GetConnectionString());
@@ -60,5 +60,5 @@ public class SampleWebApiFactory : WebApplicationFactory<Program>, IAsyncLifetim
         });
     }
 
-    public new async Task DisposeAsync() => await this.testContainer.DisposeAsync();
+    public new async ValueTask DisposeAsync() => await this.testContainer.DisposeAsync();
 }
