@@ -1,18 +1,25 @@
-﻿using Microsoft.Playwright;
+﻿using System.Text.RegularExpressions;
+using Microsoft.Playwright;
+using Microsoft.Playwright.Xunit;
+using Xunit;
 
 namespace TestingWebApps.Tests;
 
-[Parallelizable(ParallelScope.Self)]
-[TestFixture]
-public class Tests : PageTest
+internal partial class RegexHelpers
 {
-    [Test]
+    [GeneratedRegex("TipCalc")]
+    internal static partial Regex TipCalc();
+}
+
+public class TipCalcTests : PageTest
+{
+    [Fact]
     public async Task Amount100ShouldExpectDefault25PercentToBe125Total()
     {
         _ = await this.Page.GotoAsync("https://tipcalc.jeremyknight.me");
 
         // Expect a title "to contain" a substring.
-        await this.Expect(this.Page).ToHaveTitleAsync(new Regex("TipCalc"));
+        await this.Expect(this.Page).ToHaveTitleAsync(RegexHelpers.TipCalc());
 
         // create a locator
         var amountInput = this.Page.Locator("id=bill-amount");
@@ -31,7 +38,7 @@ public class Tests : PageTest
         await this.Expect(customTotal).ToHaveTextAsync("$125.00");
     }
 
-    [Test]
+    [Fact]
     public async Task Amount125RoundUpResetRoundDown()
     {
         _ = await this.Page.GotoAsync("https://tipcalc.jeremyknight.me");
