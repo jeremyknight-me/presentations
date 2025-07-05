@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using SampleWeb.Endpoints;
 using SampleWeb.Endpoints.Guids;
@@ -11,21 +10,16 @@ using SampleWeb.Endpoints.Lookups.GetById;
 using SampleWeb.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.AddServiceDefaults();
+
 var services = builder.Services;
 services.AddEndpointsApiExplorer();
-services.AddSwaggerGen();
 
 services.AddDbContext<SimpleContext>(options =>
 {
-    var baseConnection = builder.Configuration.GetConnectionString("Simple");
-    var connectionStringBuilder = new SqlConnectionStringBuilder(baseConnection);
-    if (!builder.Environment.IsEnvironment("Testing"))
-    {
-        // get password from user secrets file
-        connectionStringBuilder.Password = builder.Configuration.GetValue<string>("DbPassword");
-    }
-
-    var connectionString = connectionStringBuilder.ToString();
+    var connectionString = builder.Configuration.GetConnectionString("sample-db")
+            ?? throw new InvalidOperationException("Connection string 'sample-db' not found.");
     options.UseSqlServer(connectionString);
 });
 
@@ -41,26 +35,11 @@ services.AddScoped<LookupDeleteEndpoint>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-	app.UseSwagger();
-	app.UseSwaggerUI();
-}
-
 app.UseHttpsRedirection();
+app.MapDefaultEndpoints(); // aspire integration
 app.UseMinimalEndpoints();
-
-if (app.Environment.IsEnvironment("Testing"))
-{
-    using var scope = app.Services.CreateScope();
-    var context = scope.ServiceProvider.GetRequiredService<SimpleContext>();
-    await context.Database.EnsureCreatedAsync();
-}
 
 app.Run();
 
-public partial class Program
-{
-    // force Program to be public
-}
+// force Program to be public
+public partial class Program {}
