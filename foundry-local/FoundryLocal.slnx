@@ -1,0 +1,25 @@
+<Solution>
+  <Folder Name="/0 Repo Files/">
+    <File Path="../README.md" />
+  </Folder>
+  <Folder Name="/0 Solution Items/">
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+  </Folder>
+  <Folder Name="/1 Model Catalog/">
+    <Project Path="ModelCatalogList/ModelCatalogList.csproj" Id="6c4f9ec1-231f-413a-9ca0-a977886052e0" />
+  </Folder>
+  <Folder Name="/2 Chat/">
+    <Project Path="ChatAssistant/ChatAssistant.csproj" Id="8986ba1c-4647-492e-9f60-e7cb53a1fe49" />
+  </Folder>
+  <Folder Name="/3 Document Summarizer/">
+    <Project Path="DocumentSummarizer/DocumentSummarizer.csproj" Id="8d97107e-b63c-4441-bfc2-15268ed49caa" />
+  </Folder>
+  <Folder Name="/4 Tool Calling/">
+    <Project Path="ToolCallAssistant/ToolCallAssistant.csproj" Id="8adf5e5d-94c3-455a-9fcf-a2024ca5cc4f" />
+  </Folder>
+  <Folder Name="/5 Voice/">
+    <Project Path="VoiceTranscriber/VoiceTranscriber.csproj" Id="ab593d11-3987-422d-8cc4-badf1b00b487" />
+  </Folder>
+  <Project Path="FoundryLocal.Shared/FoundryLocal.Shared.csproj" Id="da046da3-6a1e-43fd-9449-afc722604b34" />
+</Solution>
